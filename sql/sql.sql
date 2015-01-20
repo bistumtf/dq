@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.21, for Linux (i686)
+-- MySQL dump 10.13  Distrib 5.6.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: dq
 -- ------------------------------------------------------
--- Server version	5.6.21
+-- Server version	5.6.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,6 +40,38 @@ CREATE TABLE `admin` (
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gift`
+--
+
+DROP TABLE IF EXISTS `gift`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gift` (
+  `id` int(32) NOT NULL AUTO_INCREMENT,
+  `material` varchar(32) DEFAULT NULL,
+  `band` varchar(32) DEFAULT NULL,
+  `chara` varchar(256) DEFAULT NULL,
+  `sie` varchar(256) DEFAULT NULL,
+  `content` mediumtext,
+  `img_url` varchar(256) DEFAULT NULL,
+  `title` varchar(256) DEFAULT NULL,
+  `link` varchar(256) DEFAULT NULL,
+  `price` varchar(32) DEFAULT NULL,
+  `total` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gift`
+--
+
+LOCK TABLES `gift` WRITE;
+/*!40000 ALTER TABLE `gift` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gift` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -113,4 +145,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-18 23:40:58
+-- Dump completed on 2015-01-20 17:30:37
