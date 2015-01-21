@@ -16,7 +16,6 @@ class IndexController extends Controller {
 	    var_dump($return);
 
     }
-
     public function arr($param){
 	    $str="array(";
 	    foreach($param as $k => $v){

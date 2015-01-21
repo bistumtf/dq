@@ -29,8 +29,9 @@ CREATE TABLE `admin` (
   `creattime` varchar(32) DEFAULT NULL,
   `ext` varchar(32) DEFAULT NULL,
   `groupid` int(32) DEFAULT NULL,
+  `email` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +40,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1,'admin','ec208860bb77e3d8d0f4131513f2cc0d','','luvr',NULL,'admin@qq.com');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,8 +96,14 @@ CREATE TABLE `liquor` (
   `content` mediumtext,
   `uname` varchar(32) DEFAULT NULL,
   `total` varchar(32) DEFAULT NULL,
+  `creattime` varchar(32) DEFAULT NULL,
+  `changetime` varchar(32) DEFAULT NULL,
+  `title` varchar(32) DEFAULT NULL,
+  `country` varchar(32) DEFAULT NULL,
+  `province` varchar(32) DEFAULT NULL,
+  `county` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,6 +112,7 @@ CREATE TABLE `liquor` (
 
 LOCK TABLES `liquor` WRITE;
 /*!40000 ALTER TABLE `liquor` DISABLE KEYS */;
+INSERT INTO `liquor` VALUES (1,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828924','1421828924',NULL,NULL,NULL,NULL),(2,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828940','1421828940',NULL,NULL,NULL,NULL),(3,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828941','1421828941',NULL,NULL,NULL,NULL),(4,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828941','1421828941',NULL,NULL,NULL,NULL),(5,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828942','1421828942',NULL,NULL,NULL,NULL),(6,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828942','1421828942',NULL,NULL,NULL,NULL),(7,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828943','1421828943',NULL,NULL,NULL,NULL),(8,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828943','1421828943',NULL,NULL,NULL,NULL),(9,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828944','1421828944',NULL,NULL,NULL,NULL),(10,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828945','1421828945',NULL,NULL,NULL,NULL),(11,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828945','1421828945',NULL,NULL,NULL,NULL),(12,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828946','1421828946',NULL,NULL,NULL,NULL),(13,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(14,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(15,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(16,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(17,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(18,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(19,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(20,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(21,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(22,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(23,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(24,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(25,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(26,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(27,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(28,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(29,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(30,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(31,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(32,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(33,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(34,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(35,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(36,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(37,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(38,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(39,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(40,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(41,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL),(42,1,'2','3','4','5','http://email.163.com','http://www.baidu.com','biejing','213213','1','100','1421828961','1421828961',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `liquor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-20 17:30:37
+-- Dump completed on 2015-01-21 18:31:13
