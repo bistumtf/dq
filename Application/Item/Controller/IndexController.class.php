@@ -40,8 +40,10 @@ class IndexController extends Controller {
 			$data['creattime'] = time();
 			$data['change'] = time();
 			$data['total'] = I("post.total");
-
-
+			$data['country']=I("post.country");
+			$data['province']=I("post.province");
+			$data['country']=I("post.country");
+			var_dump($data);
 			$data['location'] = I("post.type");
 			$data['url'] = I("post.type");
 		}

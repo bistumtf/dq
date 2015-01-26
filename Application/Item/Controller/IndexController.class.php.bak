@@ -40,9 +40,12 @@ class IndexController extends Controller {
 			$data['creattime'] = time();
 			$data['change'] = time();
 			$data['total'] = I("post.total");
-
+			$data['country']=I("post.country");
+			$data['province']=I("post.province");
+			$data['country']=I("post.country");
 			$data['location'] = I("post.type");
 			$data['url'] = I("post.type");
+			var_dump($data);
 		}
 		else{
 			$this->display("uploadLiquor");
