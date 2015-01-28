@@ -6,10 +6,10 @@ return array(
 		'__ROOT__' => 'http://dq/', // 更改默认的/Public 替换规则
 		'__TEMPLATE__' => 'http://dq/index.php?m=Template&c=Index',
 		'__ITEM__' => 'http://dq/index.php?m=Item&c=Index',
-		'__PUBLIC__' => '/Public/', // 更改默认的/Public 替换规则
+		'__PUBLIC__' => 'http://dq/Public/', // 更改默认的/Public 替换规则
 		'__INDEX__' => 'index.php?m=Item&c=Index', // 增加新的JS类库路径替换规则
-		'__UPLOAD__' => '/Pulibc/uploads', // 增加新的上传路径替换规则
-		'__JS__' => '/Public/js/', // 增加新的JS类库路径替换规则
+		'__UPLOAD__' => 'http://dq/Pulibc/uploads', // 增加新的上传路径替换规则
+		'__JS__' => 'http://dq/Public/js/', // 增加新的JS类库路径替换规则
 	)
 				    /*
 	    __ROOT__： 会替换成当前网站的地址（不含域名）

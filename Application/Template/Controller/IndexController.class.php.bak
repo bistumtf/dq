@@ -1,5 +1,5 @@
 <?php
-namespace Item\Controller;
+namespace Template\Controller;
 use Think\Controller;
 class IndexController extends Controller {
 	public function __construct(){
@@ -27,29 +27,42 @@ class IndexController extends Controller {
 	 * +----------+--------------+------+-----+---------+----------------+
 	 */
 
-	public function uploadLiquor(){
-		if(IS_POST){
-			$data['type'] = I("post.type");
-			$data['alcohol'] = I("post.alcohol");
-			$data['level'] = I("post.level");
-			$data['tempera'] = I("post.tempera");
-			$data['price'] = I("post.price");
-			$data['link'] = I("post.link");
-			$data['content'] = I("post.content");
-			$data['uname'] = $_SESSION['admin']['uname'];
-			$data['creattime'] = time();
-			$data['change'] = time();
-			$data['total'] = I("post.total");
-			$data['country']=I("post.country");
-			$data['province']=I("post.province");
-			$data['country']=I("post.country");
-			$data['location'] = I("post.type");
-			$data['url'] = I("post.type");
-			var_dump($data);
+	public function pc(){
+		$id=I("get.id");
+		$res=M("liquor")->where("id='$id'")->find();
+	}
+	public function phone(){
+		$id=I("get.id");
+		$res=M("liquor")->where("id='$id'")->find();
+		$image_url_arr=split(",",$res['url']);
+		$this->assign("data",$res);
+		$this->assign("image_url",$image_url_arr);
+		$this->display("liquor_detail");
+		//$this->display("phone_template");
+	}
+	public function create(){
+		$id=I("get.id");
+		$res=M("liquor")->where("id='$id'")->find();
+		$image_url_arr=split(",",$res['url']);
+		$this->assign("data",$res);
+		$this->assign("image_url",$image_url_arr);
+		$content=$this->fetch("liquor_detail");
+		$file_url=$_SERVER['DOCUMENT_ROOT']."/html";
+		$date=date("Ymd",time());
+		$file_url.="/".$date;
+		if(!is_dir($file_url)) mkdir($file_url,0777);
+		$file_url.="/".time()."_".$id."_".rand(1,10000).".html";
+		$res=file_put_contents($file_url,$content);
+		if($res){
+			$this->success("生成成功");
 		}
 		else{
-			$this->display("uploadLiquor");
+			$this->error("生成失败");
 		}
+			exit;
+
+
+
+
 	}
 }
-

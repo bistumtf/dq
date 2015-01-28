@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.21, for Linux (i686)
+-- MySQL dump 10.13  Distrib 5.6.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: dq
 -- ------------------------------------------------------
--- Server version	5.6.21
+-- Server version	5.6.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -50,6 +50,32 @@ LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` VALUES (1,'admin','ec208860bb77e3d8d0f4131513f2cc0d','','luvr',NULL,'admin@qq.com');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `block`
+--
+
+DROP TABLE IF EXISTS `block`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `block` (
+  `id` int(32) NOT NULL AUTO_INCREMENT,
+  `blockid` varchar(32) DEFAULT NULL,
+  `html_code` mediumtext,
+  `php_code` mediumtext,
+  `last_html` mediumtext,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `block`
+--
+
+LOCK TABLES `block` WRITE;
+/*!40000 ALTER TABLE `block` DISABLE KEYS */;
+/*!40000 ALTER TABLE `block` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -120,7 +146,7 @@ CREATE TABLE `liquor` (
 
 LOCK TABLES `liquor` WRITE;
 /*!40000 ALTER TABLE `liquor` DISABLE KEYS */;
-INSERT INTO `liquor` VALUES (45,1,'1','1','1','1','http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378358_7090_0.jpg','',NULL,'','admin','1','1422378358',NULL,'1','??','????','?????'),(46,1,'3','3','3','3','http:///59e92d2e209a125f9a026c54392782d9_1422378482_2955_0.jpg,http:///d41d8cd98f00b204e9800998ecf8427e_1422378482_3820_1.','',NULL,'',NULL,'3','1422378482',NULL,'3','??','?????','??'),(47,1,'54321','5','54321','5','http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378539_7419_0.jpg,http://http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378539_7419_0.jpg/d41d8cd98f00b204e9800998ecf8427e_1422378539_1419_1.','',NULL,'',NULL,'5','1422378539',NULL,'5','??','????','?????'),(48,1,'333','33','333','33','http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378636_8834_0.jpg','',NULL,'',NULL,'33','1422378636',NULL,'111111','??','?????','??');
+INSERT INTO `liquor` VALUES (45,1,'1','1','1','1','http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378358_7090_0.jpg','','要地','','admin','1','1422378358',NULL,'1','??','????','?????'),(46,1,'3','3','3','3','http:///59e92d2e209a125f9a026c54392782d9_1422378482_2955_0.jpg,http:///d41d8cd98f00b204e9800998ecf8427e_1422378482_3820_1.','',NULL,'',NULL,'3','1422378482',NULL,'3','??','?????','??'),(47,1,'54321','5','54321','5','/home/mtf/Application/dq/html/20150128/1422434615_47_336.html','',NULL,'',NULL,'5','1422378539',NULL,'5','??','????','?????'),(48,1,'333','33','333','33','/home/mtf/Application/dq/html/20150128/1422434587_48_1099.html','',NULL,'',NULL,'33','1422378636',NULL,'111111','??','?????','??');
 /*!40000 ALTER TABLE `liquor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,4 +188,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-28  1:13:32
+-- Dump completed on 2015-01-28 16:49:15

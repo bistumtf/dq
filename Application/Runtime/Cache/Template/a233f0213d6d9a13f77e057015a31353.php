@@ -7,8 +7,8 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link rel="stylesheet" href="/Public/swipe/style/base.css" type="text/css"/>
-    <link rel="stylesheet" href="/Public/swipe/style/common.css" type="text/css"/>
+    <link rel="stylesheet" href="http://dq/Public/swipe/style/base.css" type="text/css"/>
+    <link rel="stylesheet" href="http://dq/Public/swipe/style/common.css" type="text/css"/>
 </head>
 <body class="bg-gray">
 	<section id="container" class="container">
@@ -55,22 +55,12 @@
 							<img src="<?php echo ($vo); ?>" alt="" />
 						</div>
 					</figure><?php endforeach; endif; ?>
-					<figure>
-						<div class="wrap">
-							<img src="/Public/swipe/images/xo.jpg" alt="" />
-						</div>
-					</figure>
-					<figure>
-						<div class="wrap">
-							<img src="/Public/swipe/images/xo.jpg" alt="" />
-						</div>
-					</figure>
 				</section>
 			</section>
 			<!-- 轮播end-->
 			
 			<section class="product-name">
-				<h3>酒的名字牛二酒的名字牛二酒的名字牛二酒的名字牛二</h3>
+				<h3><?php echo ($data["title"]); ?></h3>
 			</section>
 			
 			<div class="product-info">
@@ -139,8 +129,8 @@
 			<p>Copyright © 北京大秦汇通商贸有限公司 </br>Powered by: 大秦汇通</p>
 		</footer>
 	</section>
-	<script src="/Public/swipe/js/zepto.min.js"></script>
-	<script src="/Public/swipe/js/swipe.js"></script>
+	<script src="http://dq/Public/swipe/js/zepto.min.js"></script>
+	<script src="http://dq/Public/swipe/js/swipe.js"></script>
 	<script>
 	
 		$(function(){

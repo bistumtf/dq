@@ -762,17 +762,5 @@ forceHelperSize: true,
 placeholder: 'draggable-placeholder',
 forcePlaceholderSize: true,
 tolerance: 'pointer',
-stop: function (event, ui) 
-}
-);
-$('#tasks').disableSelection();
-$('#tasks input:checkbox').removeAttr('checked').on('click', function () {
-		if (this.checked) $(this).closest('li').addClass('selected');
-		else $(this).closest('li').removeClass('selected');
-		});
-
-
-})
-</script>
-</body>
-</html>
+stop: function (event, ui) {           //just for Chrome!!!! so that dropdowns on items don't appear below other items after being moved
+$(ui.item).css('z-index', 'auto');
