@@ -37,6 +37,8 @@ class IndexController extends Controller {
 		$image_url_arr=split(",",$res['url']);
 		$this->assign("data",$res);
 		$this->assign("image_url",$image_url_arr);
+		var_dump($image_url_arr);
+		exit;
 		$this->display("liquor_detail");
 		//$this->display("phone_template");
 	}
@@ -54,6 +56,7 @@ class IndexController extends Controller {
 		$file_url.="/".time()."_".$id."_".rand(1,10000).".html";
 		$res=file_put_contents($file_url,$content);
 		if($res){
+			M("liquor")->where("id='$id'")->save(array("link"=>$file_url));
 			$this->success("生成成功");
 		}
 		else{

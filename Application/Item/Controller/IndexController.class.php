@@ -37,7 +37,7 @@ class IndexController extends Controller {
 			$document_root=$_SERVER['DOCUMENT_ROOT'];
 			$file=$_FILES['file'];
 			$date=date("Ymd",time());
-			$web_url=$_SERVER['SERVER_NAME']."/Public/Upload/".$date;;
+			$web_url="http://".$_SERVER['SERVER_NAME']."/Public/Upload/".$date;;
 			$file_url=$document_root."/Public/Upload/".$date;
 			if(!is_dir($file_url)){
 				mkdir($file_url,0777);
@@ -50,9 +50,12 @@ class IndexController extends Controller {
 				list($name,$type)=split("\.",$name);
 				$after="/".md5($file['name'][$i])."_".time()."_".rand(1,10000)."_".$i.".".$type;
 				$url=$file_url.$after;
-				$web_url="http://".$web_url.$after;
+
+
+
+				$web_real_url=$web_url.$after;
 				$one=$file['tmp_name'][$i];
-				array_push($image_url,$web_url);
+				array_push($image_url,$web_real_url);
 				move_uploaded_file($one,$url);
 			}
 			$data['url'] = implode(",",$image_url);
@@ -83,11 +86,14 @@ class IndexController extends Controller {
 	public function change(){
 		$id=$_GET['id'];
 		$res=M("liquor")->where("id='$id'")->find();
+		$image_url=$res['url'];
+		$this->image_url=explode(",",$image_url);
+
 		$this->assign("data",$res);
 		$this->display("changeLiquor");
 	}
 	public function doChange(){
-		$id = I("post.id");
+		$id = I("get.id");
 		$data['type'] = I("post.type");
 		$data['title'] = I("post.title");
 		$data['alcohol'] = I("post.alcohol");
@@ -103,6 +109,29 @@ class IndexController extends Controller {
 		$data['country']=I("post.country");
 		$data['province']=I("post.province");
 		$data['county']=I("post.county");
+
+		if(!empty($file['name'])){
+			$file=$_FILES['file'];
+			for($i=0;$i<count($file['tmp_name']);$i++){
+				if(empty($file['tmp_name'][$i])) continue;
+				$name=$file['name'][$i];
+				list($name,$type)=split("\.",$name);
+				$after="/".md5($file['name'][$i])."_".time()."_".rand(1,10000)."_".$i.".".$type;
+				$url=$file_url.$after;
+
+
+
+				$web_real_url=$web_url.$after;
+				$one=$file['tmp_name'][$i];
+				array_push($image_url,$web_real_url);
+				move_uploaded_file($one,$url);
+			}
+			$data['url'] = implode(",",$image_url);
+		}
+
+
+
+
 		$res=M("liquor")->where("id='$id'")->save($data);
 		if($res>0) $this->success("增加成功");
 		else $this->error("增加失败");

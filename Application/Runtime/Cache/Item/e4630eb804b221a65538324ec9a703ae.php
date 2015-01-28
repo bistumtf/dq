@@ -2,14 +2,19 @@
 <html>
 <head>
 <meta http-equiv=Content-Type content="text/html;charset=utf-8"/>
-<script src="/Public/js/jquery_1.js"></script>
+<script src="http://dq//Public/js/jquery_1.js"></script>
 </head>
 <body>
-<form action="index.php?m=Item&c=Index&a=doChange&id=<?php echo ($data["id"]); ?>" method="post" enctype="multipart/form-data">
+<form action="http://dq/index.php?m=Item&c=Index&a=doChange&id=<?php echo ($data["id"]); ?>" method="post" enctype="multipart/form-data">
 	<table>
 
 		<tr>
 			<td>标题:</td><td><input name="title" value="<?php echo ($data["title"]); ?>"/></td>
+		</tr>
+		<tr>
+			<?php if(is_array($image_url)): foreach($image_url as $key=>$vo): ?><td>
+				<div style="width:200px:height:100px"><img style="width:150px;height:200px" src="<?php echo ($vo); ?>"/></div>
+			</td><?php endforeach; endif; ?>
 		</tr>
 		<tr>
 			<tr>

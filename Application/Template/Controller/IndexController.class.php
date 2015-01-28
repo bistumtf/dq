@@ -54,7 +54,7 @@ class IndexController extends Controller {
 		$file_url.="/".time()."_".$id."_".rand(1,10000).".html";
 		$res=file_put_contents($file_url,$content);
 		if($res){
-			M("liquor")->where("id='$id'")->save(array("url"=>$file_url));
+			M("liquor")->where("id='$id'")->save(array("link"=>$file_url));
 			$this->success("生成成功");
 		}
 		else{
