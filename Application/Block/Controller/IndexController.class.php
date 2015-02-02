@@ -5,9 +5,11 @@ class IndexController extends Controller {
 	public function __construct(){
 		parent::__construct();
 	}
+
+
+
 	public function editBlock(){
 		$id=I("get.id");
-		$this->data=array('http://img1.bitautoimg.com/ycmall/mweb/img/jiaodiantu01.jpg','http://img1.bitautoimg.com/ycmall/mweb/img/jiaodiantu01.jpg','http://img1.bitautoimg.com/ycmall/mweb/img/jiaodiantu01.jpg');
 		$this->html_code="
 		<section id='slider' class='swipe' style='visibility: visible;'>
 			<section class='swipe-wrap'>
@@ -28,6 +30,16 @@ foreach(\$data as \$k => \$v){
 
 $this->display();
 		
+	}
+	public function doBlock(){
+		$data=I("post.data");
+		$type=I("post.type");
+		$id=I("post.blockid");
+
+	
+
+
+
 	}
 	public function genBlock(){
 

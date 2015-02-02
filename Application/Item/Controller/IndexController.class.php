@@ -32,6 +32,24 @@ class IndexController extends Controller {
 		$this->assign("data",$res);
 		$this->display("pageList");
 	}
+	public function ajax_list(){
+		$id=$_GET['liquorid'];
+		if(!empty($id)){
+			$rs=M("liquor")->where("id<$id")->order("id desc")->limit("20")->select();
+
+		}
+		else{
+			$rs=M("liquor")->order("id desc")->limit("20")->select();
+		}
+		$arr=array();
+		for($i=0;$i<count($rs);$i++){
+			$one=$rs[$i];
+			$img_arr=explode(",",$one['url']);
+			$image_url=$img_arr[0];
+			array_push($arr,array("id"=>$one['id'],"title"=>$one['title'],"image_url"=>$image_url));
+		}
+		echo $_GET['jsonpcallback'].'('.json_encode($arr).")";
+	}
 	public function uploadLiquor(){
 		if(IS_POST){
 			$document_root=$_SERVER['DOCUMENT_ROOT'];

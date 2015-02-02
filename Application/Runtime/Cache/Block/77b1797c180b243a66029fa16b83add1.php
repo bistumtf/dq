@@ -3,26 +3,20 @@
 <script src="http://js_source/jquery_1.js"></script>
 </head>
 <body onload="block_start()">
-
-
-
 	dsafa
 	sadfs
 	<div class="lock" style="background-color:white">
 		<div class="left">
+			<div class="left_div">click</div>
 			<ul>
-				<?php if(is_array($data)): foreach($data as $key=>$vo): ?><li value="<?php echo ($vo); ?>"><img src='<?php echo ($vo); ?>'/></li><?php endforeach; endif; ?>
 			
 			</ul>
+			<div class="right_div">click</div>
 		</div>
 		<hr>
 		<div class="right">
 			<ul>
-				<li value="1">1</li>
-				<li value="2">2</li>
-				<li value="3">3</li>
-				<li value="4">4</li>
-				<li value="5">5</li>
+				<?php if(is_array($data)): foreach($data as $key=>$vo): ?><li value=''><div><img src=''></img><span></span></div></li><?php endforeach; endif; ?>
 			</ul>
 		</div>
 		<input type="button" value="确认" id="block_1" class="block_submit"/>
@@ -30,42 +24,43 @@
 	</div>
 
 <script>
+
 $.ajax({
-			url:'__getBlockArr__',
+			url:'http://dq/index.php?m=Item&c=Index&a=ajax_list&jsonpcallback=?',
 			data:{},
 			dataType:"json",
 			type:"post",
 			success:function(data){
 			$.each(data,function(k,v){
-				$(".right ul").append("<li value='"+k+"'>"+v+"</li>");
+				$(".left ul").append("<li value='"+v.id+"'><div><img src='"+v.image_url+"'></img><span>"+v.title+"</span></div></li>");
 				})
-$(".lock li").click(function(){
-		var foward=$(this).attr("foward");
-		if(foward==undefined){
-			$(this).attr("foward","left");
-			$(".left ul").append($(this));
-		}
-		else if(foward=="right"){
-			$(this).attr("foward","left");
-			$(".left ul").append($(this));
-		}
-		else{
-			$(this).attr("foward","right");
-			$(".right ul").append($(this));
-		}
-		});
+			$(".lock li").click(function(){
+				var foward=$(this).attr("foward");
+				if(foward==undefined){
+				$(this).attr("foward","left");
+				$(".right ul").append($(this));
+				}
+				else if(foward=="right"){
+				$(this).attr("foward","left");
+				$(".left ul").append($(this));
+				}
+				else{
+				$(this).attr("foward","right");
+				$(".left ul").append($(this));
+				}
+				});
 			}
-		});
+			})
 
 function block_start(){
-$(".block_submit").click(function(){
+	$(".block_submit").click(function(){
 		var str="";
-		$(".left li").each(function(){
+		$(".right li").each(function(){
 			str+=$(this).attr("value")+",";
 			});
 		$.ajax({
-			url:'__DOBLOCK__',
-			data:{"data":str},
+			url:'http://dq/index.php?m=Block&c=Index&a=doBlock',
+			data:{"data":str,"type":"liquor","blockid":"<?php echo $_GET['blockid'];?>"},
 			dataType:"json",
 			type:"post",
 			success:function(data){

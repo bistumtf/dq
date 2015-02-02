@@ -2,11 +2,14 @@
 return array(
 	//'配置项'=>'配置值'
 
+	/*
 	'TMPL_PARSE_STRING' =>array(
 		'__ROOT__' => 'http://dq/', // 更改默认的/Public 替换规则
 		'__ADMIN__' => 'index.php?m=Home&c=Admin', // 增加新的JS类库路径替换规则
 		'__UPLOAD__' => '/Uploads', // 增加新的上传路径替换规则
+		'__BLOCK__' => 'http://dq/index.php?m=Block&c=Index',
 	)
+	 */
 				    /*
 	    __ROOT__： 会替换成当前网站的地址（不含域名）
 		__APP__： 会替换成当前应用的URL地址 （不含域名）

@@ -32,6 +32,24 @@ class IndexController extends Controller {
 		$this->assign("data",$res);
 		$this->display("pageList");
 	}
+	public function ajax_list(){
+		$id=$_GET['liquorid'];
+		if(!empty($id)){
+			$rs=M("liquor")->where("id<$id")->order("id desc")->limit("20")->select();
+
+		}
+		else{
+			$rs=M("liquor")->order("id desc")->limit("20")->select();
+		}
+		$arr=array();
+		for($i=0;$i<count($rs);$i++){
+			$one=$rs[$i];
+			$img_arr=explode(",",$one['url']);
+			$image_url=$img_arr[0];
+			array_push($arr,array("id"=>$one['id'],"title"=>$one['title'],"image_url"=>$image_url));
+		}
+		echo $_GET['ajax'].'('.json_encode($arr).")";
+	}
 	public function uploadLiquor(){
 		if(IS_POST){
 			$document_root=$_SERVER['DOCUMENT_ROOT'];
@@ -110,20 +128,23 @@ class IndexController extends Controller {
 		$data['province']=I("post.province");
 		$data['county']=I("post.county");
 
-		$file=$_FILES['file'];
-		for($i=0;$i<count($file['tmp_name']);$i++){
-			if(empty($file['tmp_name'][$i])) continue;
-			$name=$file['name'][$i];
-			list($name,$type)=split("\.",$name);
-			$after="/".md5($file['name'][$i])."_".time()."_".rand(1,10000)."_".$i.".".$type;
-			$url=$file_url.$after;
+		if(!empty($file['name'])){
+			$file=$_FILES['file'];
+			for($i=0;$i<count($file['tmp_name']);$i++){
+				if(empty($file['tmp_name'][$i])) continue;
+				$name=$file['name'][$i];
+				list($name,$type)=split("\.",$name);
+				$after="/".md5($file['name'][$i])."_".time()."_".rand(1,10000)."_".$i.".".$type;
+				$url=$file_url.$after;
 
 
 
-			$web_real_url=$web_url.$after;
-			$one=$file['tmp_name'][$i];
-			array_push($image_url,$web_real_url);
-			move_uploaded_file($one,$url);
+				$web_real_url=$web_url.$after;
+				$one=$file['tmp_name'][$i];
+				array_push($image_url,$web_real_url);
+				move_uploaded_file($one,$url);
+			}
+			$data['url'] = implode(",",$image_url);
 		}
 
 
