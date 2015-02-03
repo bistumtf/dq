@@ -1,6 +1,6 @@
 <?php if (!defined('THINK_PATH')) exit();?><html>
 <head>
-<script src="http://js_source/jquery_1.js"></script>
+<script src="/Public/js/jquery_1.js"></script>
 </head>
 <body onload="block_start()">
 	dsafa
@@ -20,6 +20,13 @@
 			</ul>
 		</div>
 		<input type="button" value="确认" id="block_1" class="block_submit"/>
+
+	</div>
+	<hr>
+	<div class="html_code">
+		<textarea id="html_code">
+			<?php echo ($html_code); ?>
+		</textarea>
 
 	</div>
 
@@ -55,12 +62,13 @@ $.ajax({
 function block_start(){
 	$(".block_submit").click(function(){
 		var str="";
+		var html_code=$("#html_code").html();
 		$(".right li").each(function(){
 			str+=$(this).attr("value")+",";
 			});
 		$.ajax({
 			url:'http://dq/index.php?m=Block&c=Index&a=doBlock',
-			data:{"data":str,"type":"liquor","blockid":"<?php echo $_GET['blockid'];?>"},
+			data:{"data":str,"type":"liquor","blockid":"<?php echo $_GET['blockid'];?>","html_code":html_code},
 			dataType:"json",
 			type:"post",
 			success:function(data){
