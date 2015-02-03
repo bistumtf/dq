@@ -3,8 +3,6 @@
 <script src="/Public/js/jquery_1.js"></script>
 </head>
 <body onload="block_start()">
-	dsafa
-	sadfs
 	<div class="lock" style="background-color:white">
 		<div class="left">
 			<div class="left_div">click</div>

@@ -128,7 +128,15 @@ class IndexController extends Controller {
 		$data['province']=I("post.province");
 		$data['county']=I("post.county");
 
-		if(!empty($file['name'])){
+		$date=date("Ymd",time());
+		$web_url="http://".$_SERVER['SERVER_NAME']."/Public/Upload/".$date;;
+		$image_url=array();
+		$document_root=$_SERVER['DOCUMENT_ROOT'];
+		$file_url=$document_root."/Public/Upload/".$date;
+		if(!is_dir($file_url)){
+			mkdir($file_url,0777);
+		}
+		if(!empty($_FILES)){
 			$file=$_FILES['file'];
 			for($i=0;$i<count($file['tmp_name']);$i++){
 				if(empty($file['tmp_name'][$i])) continue;
@@ -136,23 +144,19 @@ class IndexController extends Controller {
 				list($name,$type)=split("\.",$name);
 				$after="/".md5($file['name'][$i])."_".time()."_".rand(1,10000)."_".$i.".".$type;
 				$url=$file_url.$after;
-
-
-
 				$web_real_url=$web_url.$after;
 				$one=$file['tmp_name'][$i];
 				array_push($image_url,$web_real_url);
 				move_uploaded_file($one,$url);
 			}
+			var_dump($image_url);
 			$data['url'] = implode(",",$image_url);
 		}
 
-
-
-
+		var_dump($data);
 		$res=M("liquor")->where("id='$id'")->save($data);
-		if($res>0) $this->success("增加成功");
-		else $this->error("增加失败");
+		if($res>0) $this->success("修改成功");
+		else $this->error("修改失败");
 	}
 }
 
