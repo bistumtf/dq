@@ -105,6 +105,7 @@ class IndexController extends Controller {
 		$id=$_GET['id'];
 		$res=M("liquor")->where("id='$id'")->find();
 		$image_url=$res['url'];
+		var_dump($res);
 		$this->image_url=explode(",",$image_url);
 
 		$this->assign("data",$res);
@@ -118,7 +119,6 @@ class IndexController extends Controller {
 		$data['level'] = I("post.level");
 		$data['tempera'] = I("post.tempera");
 		$data['price'] = I("post.price");
-		$data['link'] = I("post.link");
 		$data['content'] = I("post.content");
 		$data['uname'] = $_SESSION['admin']['uname'];
 		$data['creattime'] = time();
@@ -128,6 +128,7 @@ class IndexController extends Controller {
 		$data['province']=I("post.province");
 		$data['county']=I("post.county");
 
+
 		$date=date("Ymd",time());
 		$web_url="http://".$_SERVER['SERVER_NAME']."/Public/Upload/".$date;;
 		$image_url=array();
@@ -136,7 +137,8 @@ class IndexController extends Controller {
 		if(!is_dir($file_url)){
 			mkdir($file_url,0777);
 		}
-		if(!empty($_FILES)){
+		if(!empty($_FILES['file']['name'][0])){
+			var_dump($_FILES);
 			$file=$_FILES['file'];
 			for($i=0;$i<count($file['tmp_name']);$i++){
 				if(empty($file['tmp_name'][$i])) continue;
@@ -149,11 +151,15 @@ class IndexController extends Controller {
 				array_push($image_url,$web_real_url);
 				move_uploaded_file($one,$url);
 			}
-			var_dump($image_url);
 			$data['url'] = implode(",",$image_url);
 		}
+		 $file_url=$_SERVER['DOCUMENT_ROOT']."/html";                                                                                                                
+		 $date=date("Ymd",time());
+		 $file_url.="/".$date;
+		 if(!is_dir($file_url)) mkdir($file_url,0777);
+		 $file_url.="/".time()."_".$id."_".rand(1,10000).".html";
 
-		var_dump($data);
+		$data['link'] = $file_url;
 		$res=M("liquor")->where("id='$id'")->save($data);
 		if($res>0) $this->success("修改成功");
 		else $this->error("修改失败");

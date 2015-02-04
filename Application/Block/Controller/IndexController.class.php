@@ -20,7 +20,7 @@ foreach(\$data as \$k => \$v){
 	<figure>
 	<div class='wrap'>
 	<a href='product-detail.html'>
-	<img alt='this is pic1' src='\$v' />
+	<img alt='this is pic1' src='<?php echo \$v ?>' />
 	</a>
 	</div>
 	</figure>
@@ -28,6 +28,16 @@ foreach(\$data as \$k => \$v){
 	</section>
 	</section> ";
 
+$liquor=M("liquor")->limit(20)->select();
+$data=array();
+for($i=0;$i<count($liquor);$i++){
+	$one=$liquor[$i];
+	$image_url_arr=explode(",",$one['url']);
+	$image_url=$image_url_arr[0];
+	array_push($data,array("id"=>$one['id'],"title"=>$one['title'],"link"=>$one['link'],"image_url"=>$image_url));
+	
+}
+$this->assign("data",$data);
 $this->display();
 		
 	}
@@ -36,7 +46,7 @@ $this->display();
 		$data=I("post.data");
 		$type=I("post.type");
 		$id=I("post.blockid");
-		$html=I("post.html_code");
+		$html=$_POST['html_code'];//I("post.html_code");
 		if($type=="liquor"){
 			$db_name="liquor";
 		}
@@ -59,28 +69,13 @@ $this->display();
 
 		$data=$image_url_arr;
 		$block_url=$block_url.$id.".html";
-		$rs=file_put_contents($block_url,$this->html_code);
+		$html=htmlspecialchars_decode($html);
+		$rs=file_put_contents($block_url,$html);
 		ob_start();
 		include($block_url);
 		$res=ob_get_contents();
 		$rs=file_put_contents($block_url,$res);
-
-
-
-
-
-
-
-
-
-
-		
-
-
-	
-
-
-
+		$this->success("修改成功");
 	}
 	public function genBlock(){
 

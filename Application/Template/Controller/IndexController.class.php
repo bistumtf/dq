@@ -35,6 +35,8 @@ class IndexController extends Controller {
 		$id=I("get.id");
 		$res=M("liquor")->where("id='$id'")->find();
 		$image_url_arr=split(",",$res['url']);
+
+		$res['content']=htmlspecialchars_decode($res['content']);
 		$this->assign("data",$res);
 		$this->assign("image_url",$image_url_arr);
 		$this->display("liquor_detail");
@@ -47,11 +49,7 @@ class IndexController extends Controller {
 		$this->assign("data",$res);
 		$this->assign("image_url",$image_url_arr);
 		$content=$this->fetch("liquor_detail");
-		$file_url=$_SERVER['DOCUMENT_ROOT']."/html";
-		$date=date("Ymd",time());
-		$file_url.="/".$date;
-		if(!is_dir($file_url)) mkdir($file_url,0777);
-		$file_url.="/".time()."_".$id."_".rand(1,10000).".html";
+		$file_url=$res['link'];
 		$res=file_put_contents($file_url,$content);
 		if($res){
 			M("liquor")->where("id='$id'")->save(array("link"=>$file_url));
