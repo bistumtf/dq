@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.16, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.21, for Linux (i686)
 --
 -- Host: localhost    Database: dq
 -- ------------------------------------------------------
--- Server version	5.6.16
+-- Server version	5.6.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -53,29 +53,31 @@ INSERT INTO `admin` VALUES (1,'admin','ec208860bb77e3d8d0f4131513f2cc0d','','luv
 UNLOCK TABLES;
 
 --
--- Table structure for table `block`
+-- Table structure for table `channel`
 --
 
-DROP TABLE IF EXISTS `block`;
+DROP TABLE IF EXISTS `channel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `block` (
+CREATE TABLE `channel` (
   `id` int(32) NOT NULL AUTO_INCREMENT,
-  `blockid` varchar(32) DEFAULT NULL,
-  `html_code` mediumtext,
-  `php_code` mediumtext,
-  `last_html` mediumtext,
+  `url` varchar(256) DEFAULT NULL,
+  `icon` varchar(256) DEFAULT NULL,
+  `title` varchar(256) DEFAULT NULL,
+  `child` varchar(256) DEFAULT NULL,
+  `parent` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `block`
+-- Dumping data for table `channel`
 --
 
-LOCK TABLES `block` WRITE;
-/*!40000 ALTER TABLE `block` DISABLE KEYS */;
-/*!40000 ALTER TABLE `block` ENABLE KEYS */;
+LOCK TABLES `channel` WRITE;
+/*!40000 ALTER TABLE `channel` DISABLE KEYS */;
+INSERT INTO `channel` VALUES (8,'javascript:jump(1)','icon-text-width','主页','',''),(14,'javascript:jump(11)','icon-text-width','频道管理','',NULL),(15,'javascript:jump(3)','icon-text-width','土特产','',NULL);
+/*!40000 ALTER TABLE `channel` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -124,7 +126,7 @@ CREATE TABLE `liquor` (
   `level` varchar(32) DEFAULT '0',
   `tempera` varchar(32) DEFAULT NULL,
   `price` varchar(32) DEFAULT NULL,
-  `url` varchar(256) DEFAULT NULL,
+  `url` mediumtext,
   `link` varchar(128) DEFAULT NULL,
   `location` varchar(32) DEFAULT NULL,
   `content` mediumtext,
@@ -137,7 +139,7 @@ CREATE TABLE `liquor` (
   `province` varchar(32) DEFAULT NULL,
   `county` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +148,7 @@ CREATE TABLE `liquor` (
 
 LOCK TABLES `liquor` WRITE;
 /*!40000 ALTER TABLE `liquor` DISABLE KEYS */;
-INSERT INTO `liquor` VALUES (45,1,'1','1','1','1','http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378358_7090_0.jpg','','要地','','admin','1','1422378358',NULL,'1','??','????','?????'),(46,1,'3','3','3','3','http:///59e92d2e209a125f9a026c54392782d9_1422378482_2955_0.jpg,http:///d41d8cd98f00b204e9800998ecf8427e_1422378482_3820_1.','',NULL,'',NULL,'3','1422378482',NULL,'3','??','?????','??'),(47,1,'54321','5','54321','5','/home/mtf/Application/dq/html/20150128/1422434615_47_336.html','',NULL,'',NULL,'5','1422378539',NULL,'5','??','????','?????'),(48,1,'333','33','333','33','/home/mtf/Application/dq/html/20150128/1422434587_48_1099.html','',NULL,'',NULL,'33','1422378636',NULL,'111111','??','?????','??');
+INSERT INTO `liquor` VALUES (45,1,'1111111111111','22222','2222','2222222','http://dq/Public/Upload/20150204/4b341c37e5160713758a34ca8a39c807_1423060402_5450_0.jpg,http://dq/Public/Upload/20150204/c716e23ed7d620fc1ecce03b00102d76_1423060402_9047_1.jpg,http://dq/Public/Upload/20150204/aa7d8d22d3211a6a93949a77abd2fdef_1423060402_2157_2.jpg','',NULL,'&lt;p&gt;&lt;img alt=&quot;b7003af33a87e9502dab853b13385343fbf2b42c.jpg&quot; src=&quot;/ueditor/php/upload/image/20150204/1423060414108620.jpg&quot; title=&quot;1423060414108620.jpg&quot;/&gt;&lt;/p&gt;','admin','22222','1423060416',NULL,'sSd','国家','省份、州','地级市、县'),(46,1,'3','3','3','3','http:///59e92d2e209a125f9a026c54392782d9_1422378482_2955_0.jpg,http:///d41d8cd98f00b204e9800998ecf8427e_1422378482_3820_1.','',NULL,'',NULL,'3','1422378482',NULL,'3','??','?????','??'),(47,1,'54321','5','54321','5','http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378539_7419_0.jpg,http://http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378539_7419_0.jpg/d41d8cd98f00b204e9800998ecf8427e_1422378539_1419_1.','',NULL,'',NULL,'5','1422378539',NULL,'5','??','????','?????'),(48,1,'333','33','333','33','http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378636_8834_0.jpg','',NULL,'',NULL,'33','1422378636',NULL,'111111','??','?????','??'),(49,1,'','','','','','',NULL,'','admin','','1423058929',NULL,'','国家','省份、州','地级市、县'),(50,1,'','','','','','',NULL,'&lt;p&gt;123123123123&lt;br/&gt;&lt;/p&gt;','admin','','1423060260',NULL,'','国家','省份、州','地级市、县');
 /*!40000 ALTER TABLE `liquor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-28 16:49:15
+-- Dump completed on 2015-02-06  0:23:38
