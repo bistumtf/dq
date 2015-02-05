@@ -25,7 +25,233 @@ class AdminController extends Controller {
 
 
 	}
+
+
+	public function treeChannels($data){
+		for($i=0;$i<count($data);$i++){
+			$re_data=$data[$i];
+			if(empty($re_data['layer'])){
+				$str.=' <li class="active">
+					<a href="'.$re_data['url'].'">
+					<i class="'.$re_data['icon'].'"></i>
+					<span class="menu-text"> '.$re_data['title'].' </span>
+					</a>
+					</li>
+					';
+			}
+			else{
+				$str.='
+					<li>
+					<a href="'.$re_data['url'].'" class="dropdown-toggle">
+					<i class="'.$re_data['icon'].'"></i>
+					<span class="menu-text"> '.$re_data['title'].'</span>
+					<b class="arrow icon-angle-down"></b>
+					</a>
+					<ul class="submenu">
+					';
+
+				for($i=0;$i<count($re_data['layer']);$i++){
+					$str.=self::treeChannel($re_data['layer']);
+				}
+				$str.="</ul>";
+			}
+		}
+		$str.="</li>";
+		return $str;
+	}
+
+	public function treeChannel($data){
+		$str="";
+		for($i=0;$i<count($data);$i++){
+			$one=$data[$i];
+			if(empty($one['child'])&&empty($one['parent'])){
+				$str.=' <li item="'.$one['id'].'"  class="active">
+					<a href="'.$one['url'].'">
+					<i class="'.$one['icon'].'"></i>
+					<span class="menu-text"> '.$one['title'].' </span>
+					</a>
+					</li>
+					';
+			}
+			else if(!empty($one['child'])){
+				$channel_id=explode(",",$one['child']);
+				array_pop($channel_id);
+				$str.='
+					<li  item="'.$one['id'].'" >
+					<a href="'.$one['url'].'" class="dropdown-toggle">
+					<i class="'.$one['icon'].'"></i>
+					<span class="menu-text"> '.$one['title'].'</span>
+					<b class="arrow icon-angle-down"></b>
+					</a>
+					<ul class="submenu">
+					';
+
+				for($j=0;$j<count($channel_id);$j++){
+					$childid=$channel_id[$j];
+					$ones=M("channel")->where("id=$childid")->find();
+					$str.=' <li  item="'.$ones['id'].'"  class="active">
+						<a href="'.$ones['url'].'">
+						<i class="'.$ones['icon'].'"></i>
+						<span class="menu-text"> '.$ones['title'].' </span>
+						</a>
+						</li>
+						';
+				}
+				$str.="</ul>";
+			}
+
+		}
+		$str.="</li>";
+		return $str;
+	}
+	public function getChannel(){
+		$cache_url=$_SERVER['DOCUMENT_ROOT']."/Public/Cache/";
+		$res=M("channel")->select();
+		$str=self::treeChannel($res);
+		$res=file_put_contents($cache_url."home_left_list.php",$str);
+		if($res) $this->success("生成列表成功","index.php?m=Home&c=Admin&a=index");
+
+	}
+	public function addChannel(){
+		if(IS_POST){
+			$title=I("post.title");
+			$url="javascript:jump(".$_POST['url'].")";
+			$icon=I("post.icon");
+			$channelid=I("get.channelid");
+			$child=I("post.child");
+			if(!empty($channelid)){
+				$parent=$channelid;
+				$res=M("channel")->add(array("title"=>$title,"url"=>$url,"icon"=>$icon,"child"=>$child,"parent"=>"$parent,"));
+				$childid=$res;
+				$res=M("channel")->where("id=$channelid")->find();
+				if(empty($res['child'])){
+					$res=M("channel")->where("id=$channelid")->save(array("child"=>"$childid,"));
+				}
+				else{
+					$childidarr=explode(",",$res['child']);
+					array_pop($childidarr);
+					array_push($childidarr,$childid);
+					$childid=implode(",",$childid);
+				$res=M("channel")->where("id=$channelid")->save(array("child"=>"$childid,"));
+			}
+			}
+			else {
+				$res=M("channel")->add(array("title"=>$title,"url"=>$url,"icon"=>$icon,"child"=>$child));
+			}
+			
+			if($res) $this->success("增加成功");
+			else $this->error("增加失败");
+
+		}
+		else {
+			$this->channelid=I("get.channelid");
+			$this->display();
+		}
+
+	}
+	public function detailChannel(){
+		$channelid=I("get.channelid");
+		$res=M("channel")->where("id=$channelid")->find();
+		if(empty($res['child'])){
+			$this->channel=null;
+		}
+		else{
+			$childid=substr($res['child'],0,-1);
+			$this->channel=M("channel")->where("id in ($childid)")->select();
+
+		}
+		$childid=$res['child'];
+		$this->channelid=$channelid;
+		$this->display();
+	}
+	public function insertChannel(){
+		/*
+		 *|  1 | javascript:jump(3) | icon-text-width | 酒    |       | NULL   |
+		 |  2 | javascript:jump(3) | icon-text-width | 酒    | 3,4,  | NULL   |
+		 |  3 | javascript:jump(3) | icon-text-width | 酒    |       | 2      |
+		 |  4 | javascript:jump(3) | icon-text-width | 酒    |       | 2      |
+		 |  5 | javascript:jump(3) | icon-text-width | 酒    |       |       
+		 */
+		$this->channel=M("channel")->where("child is not null and child!=''")->select();
+		$this->display();
+
+	}
+	public function delChannel(){
+		$channelid=I("get.channelid");
+		$res=M("channel")->where("parent like '%$channelid%'")->select();
+		if(!empty($res)) {
+			for($i=0;$i<count($res);$i++){
+
+				$child_id_arr=explode(",",$res[$i]['parent']);
+				array_pop($child_id_arr);
+				for($j=0;$j<count($child_id_arr);$j++){
+					if($child_id_arr[$j]==$channelid){
+						unset($child_id_arr[$j]);
+					}
+				}
+				$childid=implode(",",$child_id_arr);
+				$cid=$res[$i]['id'];
+				if(count($child_id_arr)==0){
+					$d_res=M("channel")->where("id=$cid")->save(array("parent"=>"$childid"));
+				}
+				else 
+					$d_res=M("channel")->where("id=$cid")->save(array("parent"=>"$childid,"));
+
+
+
+			}
+
+		}
+
+		$res=M("channel")->where("child like '%$channelid%'")->select();
+		if(!empty($res)){
+			for($i=0;$i<count($res);$i++){
+
+				$child_id_arr=explode(",",$res[$i]['child']);
+				array_pop($child_id_arr);
+				for($j=0;$j<count($child_id_arr);$j++){
+					if($child_id_arr[$j]==$channelid){
+						unset($child_id_arr[$j]);
+					}
+				}
+				$cid=$res[$i]['id'];
+				if(count($child_id_arr)==0){
+					$d_res=M("channel")->where("id=$cid")->save(array("child"=>"$childid"));
+				}
+				else 
+					$d_res=M("channel")->where("id=$cid")->save(array("child"=>"$childid,"));
+
+
+
+			}
+		}
+		$res=M("channel")->where("id=$channelid")->delete();
+		if($res) $this->success("删除成功");
+		else $this->error("删除失败");
+
+
+	}
 	public function index(){
+		$cache_url=$_SERVER['DOCUMENT_ROOT']."/Public/Cache/";
+		$this->home_left_list=file_get_contents($cache_url."home_left_list.php");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		$this->display("index");
 	}
 	public function login(){

@@ -25,8 +25,120 @@ class AdminController extends Controller {
 
 
 	}
+
+
+	public function treeChannels($data){
+		for($i=0;$i<count($data);$i++){
+			$re_data=$data[$i];
+			if(empty($re_data['layer'])){
+				$str.=' <li class="active">
+					<a href="'.$re_data['url'].'">
+					<i class="'.$re_data['icon'].'"></i>
+					<span class="menu-text"> '.$re_data['title'].' </span>
+					</a>
+					</li>
+					';
+			}
+			else{
+				$str.='
+					<li>
+					<a href="'.$re_data['url'].'" class="dropdown-toggle">
+					<i class="'.$re_data['icon'].'"></i>
+					<span class="menu-text"> '.$re_data['title'].'</span>
+					<b class="arrow icon-angle-down"></b>
+					</a>
+					<ul class="submenu">
+					';
+
+				for($i=0;$i<count($re_data['layer']);$i++){
+					$str.=self::treeChannel($re_data['layer']);
+				}
+				$str.="</ul>";
+			}
+		}
+		$str.="</li>";
+		return $str;
+	}
+
+	public function treeChannel($data){
+		$str="";
+		for($i=0;$i<count($data);$i++){
+			$one=$data[$i];
+			if(empty($one['parent'])&&empty($one['child'])){
+				$str.=' <li class="active">
+					<a href="'.$one['url'].'">
+					<i class="'.$one['icon'].'"></i>
+					<span class="menu-text"> '.$one['title'].' </span>
+					</a>
+					</li>
+					';
+			}
+			else if(!empty($one['child']))){
+			}
+		}
+		$str.="</li>";
+		return $str;
+	}
+	public function insertChannel(){
+		$res=M("channel")->add(array("url"=>"javascript:jump(3)","icon"=>"icon-text-width",'title'=>'酒',"child"=>""));
+		var_dump($res);
+	}
+	public function getChannel(){
+		$res=M("channel")->select();
+		$str=self::treeChannel($res);
+		var_dump($str);
+
+	}
 	public function index(){
-		$tihs->display("index");
+		$cache_url=$_SERVER['DOCUMENT_ROOT']."/Public/Cache/";
+		//$this->home_left_list=file_get_contents($cache_url."home_left_list.php");
+		$str=array(
+			0=>array(
+				'url'=>'javascript:jump(3)',
+				'icon'=>'icon-text-width',
+				'title'=>'酒',
+				'layer'=>'',
+			),
+			1=>array(
+				'url'=>'javascript:jump(3)',
+				'icon'=>'icon-desktop',
+				'title'=>'特产',
+				'layer'=>array(
+					0=>array(
+					'url'=>'javascript:jump(3)',
+					'icon'=>'icon-text-width',
+					'title'=>'酒',
+					'layer'=>'',
+					),
+				)
+
+
+
+
+			),
+
+
+		);
+		$this->home_left_list=self::treeChannel($str);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		$this->display("index");
 	}
 	public function login(){
 		if(IS_POST){

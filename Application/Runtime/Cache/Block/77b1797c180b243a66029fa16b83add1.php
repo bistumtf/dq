@@ -98,6 +98,7 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 								<div style="float:left;float:left;padding:10px 20px 40px 20px" itemid="'.$one['id'].'"><div><img style="width:200px;height:150px" src="'.$one['image_url'].'"></img></div><span>'.$one['title'].'</span></div>
 								'; } ?>
 
+								<div></div>
 							</div>
 							<hr>
 							<input type="button" value="确认" id="block_1" class="block_submit"/>

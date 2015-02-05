@@ -107,7 +107,6 @@ class IndexController extends Controller {
 		$image_url=$res['url'];
 		var_dump($res);
 		$this->image_url=explode(",",$image_url);
-
 		$this->assign("data",$res);
 		$this->display("changeLiquor");
 	}
