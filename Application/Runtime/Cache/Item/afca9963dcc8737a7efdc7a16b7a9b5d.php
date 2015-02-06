@@ -49,7 +49,7 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 		<ul class="breadcrumb">
 			<li>
 			<i class="icon-home home-icon"></i>
-			<a target="_blank" href="http://dq/index.php?m=Item&c=Index&a=uploadLiquor">增加新酒</a>
+			<a target="_blank" href="http://dq/index.php?m=Item&c=Index&a=uploadItem&channelid=<?php echo ($channelid); ?>">增加新酒</a>
 			</li>
 			<li class="active">控制台</li>
 		</ul><!-- .breadcrumb -->
@@ -130,82 +130,6 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 									<td><a target='_blank' href='http://dq/index.php?m=Template&c=Index&a=phone&id=<?php echo ($vo["id"]); ?>'>手机预览</a></td>
 									<td><a target='_self' href='http://dq/index.php?m=Template&c=Index&a=create&id=<?php echo ($vo["id"]); ?>'>生成页面</a></td>
 								</tr><?php endforeach; endif; ?>
-								<tr>
-									<td>internet.com</td>
-
-									<td>
-										<small>
-											<s class="red">$29.99</s>
-										</small>
-										<b class="green">$19.99</b>
-									</td>
-
-									<td class="hidden-480">
-										<span class="label label-info arrowed-right arrowed-in">销售中</span>
-									</td>
-								</tr>
-
-								<tr>
-									<td>online.com</td>
-
-									<td>
-										<small>
-											<s class="red"></s>
-										</small>
-										<b class="green">$16.45</b>
-									</td>
-
-									<td class="hidden-480">
-										<span class="label label-success arrowed-in arrowed-in-right">可用</span>
-									</td>
-								</tr>
-
-								<tr>
-									<td>newnet.com</td>
-
-									<td>
-										<small>
-											<s class="red"></s>
-										</small>
-										<b class="green">$15.00</b>
-									</td>
-
-									<td class="hidden-480">
-										<span class="label label-danger arrowed">待定</span>
-									</td>
-								</tr>
-
-								<tr>
-									<td>web.com</td>
-
-									<td>
-										<small>
-											<s class="red">$24.99</s>
-										</small>
-										<b class="green">$19.95</b>
-									</td>
-
-									<td class="hidden-480">
-										<span class="label arrowed">
-											<s>无货</s>
-										</span>
-									</td>
-								</tr>
-
-								<tr>
-									<td>domain.com</td>
-
-									<td>
-										<small>
-											<s class="red"></s>
-										</small>
-										<b class="green">$12.00</b>
-									</td>
-
-									<td class="hidden-480">
-										<span class="label label-warning arrowed arrowed-right">售完</span>
-									</td>
-								</tr>
 								</tbody>
 							</table>
 						</div><!-- /widget-main -->

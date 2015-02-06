@@ -27,19 +27,21 @@ class IndexController extends Controller {
 	 * +----------+--------------+------+-----+---------+----------------+
 	 */
 
-	public function liquor_list(){
-		$res=M("liquor")->select();
+	public function item_list(){
+		$channelid=I("channelid");
+		$res=M("item")->where("channelid=$channelid")->select();
+		$this->channelid=$channelid;
 		$this->assign("data",$res);
 		$this->display("pageList");
 	}
 	public function ajax_list(){
-		$id=$_GET['liquorid'];
+		$id=$_GET['itemid'];
 		if(!empty($id)){
-			$rs=M("liquor")->where("id<$id")->order("id desc")->limit("20")->select();
+			$rs=M("item")->where("id<$id")->order("id desc")->limit("20")->select();
 
 		}
 		else{
-			$rs=M("liquor")->order("id desc")->limit("20")->select();
+			$rs=M("item")->order("id desc")->limit("20")->select();
 		}
 		$arr=array();
 		for($i=0;$i<count($rs);$i++){
@@ -50,7 +52,7 @@ class IndexController extends Controller {
 		}
 		echo $_GET['jsonpcallback'].'('.json_encode($arr).")";
 	}
-	public function uploadLiquor(){
+	public function uploadItem(){
 		if(IS_POST){
 			$document_root=$_SERVER['DOCUMENT_ROOT'];
 			$file=$_FILES['file'];
@@ -92,23 +94,24 @@ class IndexController extends Controller {
 			$data['country']=I("post.country");
 			$data['province']=I("post.province");
 			$data['county']=I("post.county");
-			$res=M("liquor")->add($data);
+			$res=M("item")->add($data);
 			if($res>0) $this->success("增加成功");
 			else $this->error("增加失败");
 			//$data['location'] = I("post.type");
 		}
 		else{
-			$this->display("uploadLiquor");
+			$this->channelid=I("get.channelid");
+			$this->display("uploadItem");
 		}
 	}
 	public function change(){
 		$id=$_GET['id'];
-		$res=M("liquor")->where("id='$id'")->find();
+		$res=M("item")->where("id='$id'")->find();
 		$image_url=$res['url'];
 		var_dump($res);
 		$this->image_url=explode(",",$image_url);
 		$this->assign("data",$res);
-		$this->display("changeLiquor");
+		$this->display("changeItem");
 	}
 	public function doChange(){
 		$id = I("get.id");
@@ -159,7 +162,7 @@ class IndexController extends Controller {
 		 $file_url.="/".time()."_".$id."_".rand(1,10000).".html";
 
 		$data['link'] = $file_url;
-		$res=M("liquor")->where("id='$id'")->save($data);
+		$res=M("item")->where("id='$id'")->save($data);
 		if($res>0) $this->success("修改成功");
 		else $this->error("修改失败");
 	}

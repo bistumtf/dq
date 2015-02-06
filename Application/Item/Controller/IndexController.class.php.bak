@@ -27,19 +27,21 @@ class IndexController extends Controller {
 	 * +----------+--------------+------+-----+---------+----------------+
 	 */
 
-	public function liquor_list(){
-		$res=M("liquor")->select();
+	public function item_list(){
+		$channelid=I("channelid");
+		$res=M("item")->where("channelid=$channelid")->select();
+		$this->channelid=$channelid;
 		$this->assign("data",$res);
 		$this->display("pageList");
 	}
 	public function ajax_list(){
-		$id=$_GET['liquorid'];
+		$id=$_GET['itemid'];
 		if(!empty($id)){
-			$rs=M("liquor")->where("id<$id")->order("id desc")->limit("20")->select();
+			$rs=M("item")->where("id<$id")->order("id desc")->limit("20")->select();
 
 		}
 		else{
-			$rs=M("liquor")->order("id desc")->limit("20")->select();
+			$rs=M("item")->order("id desc")->limit("20")->select();
 		}
 		$arr=array();
 		for($i=0;$i<count($rs);$i++){
@@ -48,9 +50,9 @@ class IndexController extends Controller {
 			$image_url=$img_arr[0];
 			array_push($arr,array("id"=>$one['id'],"title"=>$one['title'],"image_url"=>$image_url));
 		}
-		echo $_GET['ajax'].'('.json_encode($arr).")";
+		echo $_GET['jsonpcallback'].'('.json_encode($arr).")";
 	}
-	public function uploadLiquor(){
+	public function uploadItem(){
 		if(IS_POST){
 			$document_root=$_SERVER['DOCUMENT_ROOT'];
 			$file=$_FILES['file'];
@@ -92,23 +94,23 @@ class IndexController extends Controller {
 			$data['country']=I("post.country");
 			$data['province']=I("post.province");
 			$data['county']=I("post.county");
-			$res=M("liquor")->add($data);
+			$res=M("item")->add($data);
 			if($res>0) $this->success("增加成功");
 			else $this->error("增加失败");
 			//$data['location'] = I("post.type");
 		}
 		else{
-			$this->display("uploadLiquor");
+			$this->display("uploadItem");
 		}
 	}
 	public function change(){
 		$id=$_GET['id'];
-		$res=M("liquor")->where("id='$id'")->find();
+		$res=M("item")->where("id='$id'")->find();
 		$image_url=$res['url'];
+		var_dump($res);
 		$this->image_url=explode(",",$image_url);
-
 		$this->assign("data",$res);
-		$this->display("changeLiquor");
+		$this->display("changeItem");
 	}
 	public function doChange(){
 		$id = I("get.id");
@@ -118,7 +120,6 @@ class IndexController extends Controller {
 		$data['level'] = I("post.level");
 		$data['tempera'] = I("post.tempera");
 		$data['price'] = I("post.price");
-		$data['link'] = I("post.link");
 		$data['content'] = I("post.content");
 		$data['uname'] = $_SESSION['admin']['uname'];
 		$data['creattime'] = time();
@@ -128,7 +129,17 @@ class IndexController extends Controller {
 		$data['province']=I("post.province");
 		$data['county']=I("post.county");
 
-		if(!empty($file['name'])){
+
+		$date=date("Ymd",time());
+		$web_url="http://".$_SERVER['SERVER_NAME']."/Public/Upload/".$date;;
+		$image_url=array();
+		$document_root=$_SERVER['DOCUMENT_ROOT'];
+		$file_url=$document_root."/Public/Upload/".$date;
+		if(!is_dir($file_url)){
+			mkdir($file_url,0777);
+		}
+		if(!empty($_FILES['file']['name'][0])){
+			var_dump($_FILES);
 			$file=$_FILES['file'];
 			for($i=0;$i<count($file['tmp_name']);$i++){
 				if(empty($file['tmp_name'][$i])) continue;
@@ -136,9 +147,6 @@ class IndexController extends Controller {
 				list($name,$type)=split("\.",$name);
 				$after="/".md5($file['name'][$i])."_".time()."_".rand(1,10000)."_".$i.".".$type;
 				$url=$file_url.$after;
-
-
-
 				$web_real_url=$web_url.$after;
 				$one=$file['tmp_name'][$i];
 				array_push($image_url,$web_real_url);
@@ -146,13 +154,16 @@ class IndexController extends Controller {
 			}
 			$data['url'] = implode(",",$image_url);
 		}
+		 $file_url=$_SERVER['DOCUMENT_ROOT']."/html";                                                                                                                
+		 $date=date("Ymd",time());
+		 $file_url.="/".$date;
+		 if(!is_dir($file_url)) mkdir($file_url,0777);
+		 $file_url.="/".time()."_".$id."_".rand(1,10000).".html";
 
-
-
-
-		$res=M("liquor")->where("id='$id'")->save($data);
-		if($res>0) $this->success("增加成功");
-		else $this->error("增加失败");
+		$data['link'] = $file_url;
+		$res=M("item")->where("id='$id'")->save($data);
+		if($res>0) $this->success("修改成功");
+		else $this->error("修改失败");
 	}
 }
 

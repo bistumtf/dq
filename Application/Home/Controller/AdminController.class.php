@@ -108,7 +108,12 @@ class AdminController extends Controller {
 		$cache_url=$_SERVER['DOCUMENT_ROOT']."/Public/Cache/";
 		$res=M("channel")->select();
 		$str=self::treeChannel($res);
-		$res=file_put_contents($cache_url."home_left_list.php",$str);
+		$res=file_put_contents($cache_url."home_left_list.html",$str);
+		ob_start();
+		$this->display($cache_url."home_left_list.html");
+		$str=ob_get_contents();
+		ob_clean();
+		$res=file_put_contents($cache_url."home_left_list.html",$str);
 		if($res) $this->success("生成列表成功","index.php?m=Home&c=Admin&a=index");
 
 	}
@@ -122,6 +127,10 @@ class AdminController extends Controller {
 			if(!empty($channelid)){
 				$parent=$channelid;
 				$res=M("channel")->add(array("title"=>$title,"url"=>$url,"icon"=>$icon,"child"=>$child,"parent"=>"$parent,"));
+				if($url=="javascript:jump(#)"){
+					$url="javascript:jump('__ITEM__&a=liquor_list&channelid=$res')";
+					$r_res=M("channel")->where("id=$res")->save(array("url"=>$url));
+				}
 				$childid=$res;
 				$res=M("channel")->where("id=$channelid")->find();
 				if(empty($res['child'])){
@@ -131,12 +140,17 @@ class AdminController extends Controller {
 					$childidarr=explode(",",$res['child']);
 					array_pop($childidarr);
 					array_push($childidarr,$childid);
-					$childid=implode(",",$childid);
-				$res=M("channel")->where("id=$channelid")->save(array("child"=>"$childid,"));
-			}
+					$childid=implode(",",$childidarr);
+					$res=M("channel")->where("id=$channelid")->save(array("child"=>"$childid,"));
+
+				}
 			}
 			else {
 				$res=M("channel")->add(array("title"=>$title,"url"=>$url,"icon"=>$icon,"child"=>$child));
+				if($url=="#"){
+					$url="javascript:jump('__ITEM__&a=liquor_list&channelid=$res')";
+					$res=M("channel")->where()->save(array("url"=>$url));
+				}
 			}
 			
 			if($res) $this->success("增加成功");
@@ -157,7 +171,8 @@ class AdminController extends Controller {
 		}
 		else{
 			$childid=substr($res['child'],0,-1);
-			$this->channel=M("channel")->where("id in ($childid)")->select();
+			if(empty($childid)) $this->channel=null;
+			else $this->channel=M("channel")->where("id in ($childid)")->select();
 
 		}
 		$childid=$res['child'];
@@ -172,7 +187,7 @@ class AdminController extends Controller {
 		 |  4 | javascript:jump(3) | icon-text-width | 酒    |       | 2      |
 		 |  5 | javascript:jump(3) | icon-text-width | 酒    |       |       
 		 */
-		$this->channel=M("channel")->where("child is not null and child!=''")->select();
+		$this->channel=M("channel")->where("parent is null or parent=''")->select();
 		$this->display();
 
 	}
@@ -233,7 +248,7 @@ class AdminController extends Controller {
 	}
 	public function index(){
 		$cache_url=$_SERVER['DOCUMENT_ROOT']."/Public/Cache/";
-		$this->home_left_list=file_get_contents($cache_url."home_left_list.php");
+		$this->home_left_list=file_get_contents($cache_url."home_left_list.html");
 
 
 

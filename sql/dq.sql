@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.21, for Linux (i686)
+-- MySQL dump 10.13  Distrib 5.6.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: dq
 -- ------------------------------------------------------
--- Server version	5.6.21
+-- Server version	5.6.16
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -67,7 +67,7 @@ CREATE TABLE `channel` (
   `child` varchar(256) DEFAULT NULL,
   `parent` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `channel` (
 
 LOCK TABLES `channel` WRITE;
 /*!40000 ALTER TABLE `channel` DISABLE KEYS */;
-INSERT INTO `channel` VALUES (8,'javascript:jump(1)','icon-text-width','主页','',''),(14,'javascript:jump(11)','icon-text-width','频道管理','',NULL),(15,'javascript:jump(3)','icon-text-width','土特产','',NULL);
+INSERT INTO `channel` VALUES (8,'javascript:jump(1)','icon-text-width','主页','',''),(14,'javascript:jump(11)','icon-text-width','频道管理','',NULL),(15,'javascript:jump(3)','icon-text-width','土特产','35,',NULL),(35,'javascript:jump(\'__ITEM__&a=item_list&channelid=35\')','icon-text-width','甘肃','','15,');
 /*!40000 ALTER TABLE `channel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,6 +110,38 @@ CREATE TABLE `gift` (
 LOCK TABLES `gift` WRITE;
 /*!40000 ALTER TABLE `gift` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gift` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item`
+--
+
+DROP TABLE IF EXISTS `item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item` (
+  `id` int(32) NOT NULL AUTO_INCREMENT,
+  `title` varchar(256) DEFAULT NULL,
+  `creat_at` varchar(32) DEFAULT NULL,
+  `price` varchar(32) DEFAULT NULL,
+  `image_url` mediumtext,
+  `webibo_url` mediumtext,
+  `link` varchar(256) DEFAULT NULL,
+  `content` mediumtext,
+  `total` varchar(32) DEFAULT NULL,
+  `detail` mediumtext,
+  `channelid` int(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item`
+--
+
+LOCK TABLES `item` WRITE;
+/*!40000 ALTER TABLE `item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -190,4 +222,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-06  0:23:38
+-- Dump completed on 2015-02-06 20:03:21

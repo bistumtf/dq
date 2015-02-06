@@ -98,7 +98,7 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 								<?php if(is_array($channel)): foreach($channel as $key=>$vo): ?><tr>
 									<td><?php echo ($vo["id"]); ?></td>
 									<td><?php echo ($vo["title"]); ?></td>
-									<td><a target="_blank" href="http://dq/index.php?m=Home&c=Admin&a=detailChannel&channelid=<?php echo ($vo["id"]); ?>">查看子结点</a>  |  <a target="_blank" href="http://dq/index.php?m=Home&c=Admin&a=delChannel&channelid=<?php echo ($vo["id"]); ?>">删除</a></td>
+									<td><a target="_blank" href="http://dq/index.php?m=Home&c=Admin&a=detailChannel&channelid=<?php echo ($vo["id"]); ?>">查看子结点</a>  |  <a target="_self" href="http://dq/index.php?m=Home&c=Admin&a=delChannel&channelid=<?php echo ($vo["id"]); ?>">删除</a></td>
 								</tr><?php endforeach; endif; ?>
 
 								</tbody>
