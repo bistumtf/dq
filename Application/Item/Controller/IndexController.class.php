@@ -5,28 +5,84 @@ class IndexController extends Controller {
 	public function __construct(){
 		parent::__construct();
 	}
-	/*
-	 *
-	 * +----------+--------------+------+-----+---------+----------------+
-	 * | Field    | Type         | Null | Key | Default | Extra          |
-	 * +----------+--------------+------+-----+---------+----------------+
-	 * | id       | int(32)      | NO   | PRI | NULL    | auto_increment |
-	 * | type     | int(32)      | YES  |     | 0       |                |
-	 * | alcohol  | varchar(32)  | YES  |     | 0       |                |
-	 * | level    | varchar(32)  | YES  |     | 0       |                |
-	 * | tempera  | varchar(32)  | YES  |     | NULL    |                |
-	 * | price    | varchar(32)  | YES  |     | NULL    |                |
-	 * | url      | varchar(256) | YES  |     | NULL    |                |
-	 * | link     | varchar(128) | YES  |     | NULL    |                |
-	 * | location | varchar(32)  | YES  |     | NULL    |                |
-	 * | content  | mediumtext   | YES  |     | NULL    |                |
-	 * | uname    | varchar(32)  | YES  |     | NULL    |                |
-	 * | creattime  | varchar(32)  | YES  |     | NULL    |                |
-	 * | changetime | varchar(32)  | YES  |     | NULL    |                |
-	 * | total    | varchar(32)  | YES  |     | NULL    |                |
-	 * +----------+--------------+------+-----+---------+----------------+
-	 */
 
+	public function del(){
+		$id=I("get.id");
+		$res=M("item")->where("id=$id")->find();
+		unlink($res['link']);
+		$res=M("item")->where("id=$id")->save(array("status"=>3));
+		if($res) $this->success("删除成功");
+		else $this->error("删除失败");
+
+
+	}
+	public function getItem(){
+		$channelid=I("get.channelid");
+
+		$res=M("item")->where("channelid=$channelid")->field("id,title,image_url")->select();
+		$data=array();
+		for($i=0;$i<count($res);$i++){
+			$data[$i]['id']=$res[$i]['id'];
+			$data[$i]['title']=$res[$i]['title'];
+			$image_url=$res[$i]['image_url'];
+			$image_url_arr=explode(",",$image_url);
+			$data[$i]['image_url']=$image_url_arr[0];
+		}
+		echo $_GET['jsonpcallback'].'('.json_encode($data).')';
+
+	}
+	public function getMore(){
+		$this->channelid=I("get.channelid");
+		$channelid=I("get.channelid");
+		$data=M("item")->where("channelid='$channelid'")->select();
+		for($i=0;$i<count($data);$i++){
+			$one=$data[$i];
+			$image_url_arr=explode(",",$one['image_url']);
+			$data[$i]['image_url']=$image_url_arr[0];
+
+		}
+		$this->data=$data;
+		$this->display("more");
+
+	}
+	public function delTable(){
+		$id=I("get.table_item_id");
+		$res=M("table_item")->where("id='$id'")->delete();
+		if($res) echo $_GET['jsonpcallback'].'('.json_encode(1).')';
+		else  echo $_GET['jsonpcallback'].'('.json_encode(-1).')';
+
+	}
+	public function addTable(){
+		if(IS_POST){
+			$title=I("post.title");
+			$item=I("post.item");
+			if(empty($title)||count($item)==0) $this->error("信息不完整");
+			$str="";
+			for($i=0;$i<count($item);$i++){
+				if(empty($item[$i])){
+					unset($item[$i]);
+				}
+				else{
+				}
+			}
+			$item=var_export($item,true);
+			$res=M("table_item")->add(array("title"=>$title,"content"=>$item));
+			if($res){
+				$this->success("增加成功");
+			}
+			else $this->error("增加失败");
+
+
+
+
+
+
+
+		}
+		else 
+			$this->display();
+
+	}
 	public function item_list(){
 		$channelid=I("channelid");
 		$res=M("item")->where("channelid=$channelid")->select();
@@ -78,37 +134,101 @@ class IndexController extends Controller {
 				array_push($image_url,$web_real_url);
 				move_uploaded_file($one,$url);
 			}
-			$data['url'] = implode(",",$image_url);
-			$data['type'] = I("post.type");
+			/*
+			 * +------------+--------------+------+-----+---------+----------------+
+			 * | Field      | Type         | Null | Key | Default | Extra          |
+			 * +------------+--------------+------+-----+---------+----------------+
+			 * | id         | int(32)      | NO   | PRI | NULL    | auto_increment |
+			 * | title      | varchar(256) | YES  |     | NULL    |                |
+			 * | creat_at   | varchar(32)  | YES  |     | NULL    |                |
+			 * | price      | varchar(32)  | YES  |     | NULL    |                |
+			 * | image_url  | mediumtext   | YES  |     | NULL    |                |
+			 * | webibo_url | mediumtext   | YES  |     | NULL    |                |
+			 * | link       | varchar(256) | YES  |     | NULL    |                |
+			 * | content    | mediumtext   | YES  |     | NULL    |                |
+			 * | total      | varchar(32)  | YES  |     | NULL    |                |
+			 * | detail     | mediumtext   | YES  |     | NULL    |                |
+			 * | table_id      | varchar(32)  | YES  |     | NULL    |                |
+			 * | table_content | mediumtext   | YES  |     | NULL    |                |
+			 * | channelid  | int(32)      | YES  |     | NULL    |                |
+			 * +------------+--------------+------+-----+---------+----------------+
+			 *
+			 * 
+			 * status 
+			 *    1 编辑完成 
+			 *    2 已发布
+			 *    3 已下线
+			 *
+			 */
+
+
+
+
+
 			$data['title'] = I("post.title");
-			$data['alcohol'] = I("post.alcohol");
-			$data['level'] = I("post.level");
-			$data['tempera'] = I("post.tempera");
+			$data['creat_at'] = time();
 			$data['price'] = I("post.price");
-			$data['link'] = I("post.link");
+			$data['image_url'] = implode(",",$image_url);
+			$data['weibo_url'] = I("post.weibo_url");
 			$data['content'] = I("post.content");
-			$data['uname'] = $_SESSION['admin']['uname'];
-			$data['creattime'] = time();
-			$data['change'] = time();
 			$data['total'] = I("post.total");
-			$data['country']=I("post.country");
-			$data['province']=I("post.province");
-			$data['county']=I("post.county");
+			$data['channelid']=I("get.channelid");
+			$data['sold_total']=I("post.sold_total");
+			$data['status']=1;
+			$data['table_id']=I('table_item_id');
+			$data['table_content']=var_export(I('post.item'),true);
+
+
+
 			$res=M("item")->add($data);
 			if($res>0) $this->success("增加成功");
 			else $this->error("增加失败");
 			//$data['location'] = I("post.type");
 		}
 		else{
+			$table_item=M("table_item")->select();
+			$one=null;
+			if(!empty($table_item)) $one=$table_item[0];
+
+
+			eval('$table_content='.$one['content'].';');
+			$this->table_info=$table_content;
+			var_dump($table_content);
+			
+			$this->table_s=$table_item;
 			$this->channelid=I("get.channelid");
 			$this->display("uploadItem");
 		}
 	}
+	public function getTableItem(){
+		$table_item_id=I("get.table_item_id");
+		$res=M("table_item")->where("id=$table_item_id")->find();
+		eval('$data='.$res['content'].';');
+		echo $_GET['jsonpcallback'].'('.json_encode($data).')';
+		
+	}
 	public function change(){
 		$id=$_GET['id'];
 		$res=M("item")->where("id='$id'")->find();
-		$image_url=$res['url'];
-		var_dump($res);
+		$image_url=$res['image_url'];
+
+
+		$table_id=$res['table_id'];
+		$table=M("table_item")->where("id=$table_id")->find();
+		$res['content']=htmlspecialchars_decode($res['content']);
+		eval('$item_table_content='.$res['table_content'].';');
+		eval('$table_content='.$table['content'].';');
+		$array=array();
+		for($i=0;$i<count($item_table_content);$i++){
+			$array[$i]=array('title'=>$table_content[$i],'content'=>$item_table_content[$i]);
+		}
+		$this->item_table_id=$res['table_id'];
+		$this->table_info=$array;
+
+
+		$table_item=M("table_item")->field("id,title")->select();
+		$this->table_s=$table_item;
+
 		$this->image_url=explode(",",$image_url);
 		$this->assign("data",$res);
 		$this->display("changeItem");

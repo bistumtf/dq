@@ -141,15 +141,15 @@ class AdminController extends Controller {
 					array_pop($childidarr);
 					array_push($childidarr,$childid);
 					$childid=implode(",",$childidarr);
-					$res=M("channel")->where("id=$channelid")->save(array("child"=>"$childid,"));
+					$res=M("channel")->where("id='$channelid'")->save(array("child"=>"$childid,"));
 
 				}
 			}
 			else {
 				$res=M("channel")->add(array("title"=>$title,"url"=>$url,"icon"=>$icon,"child"=>$child));
 				if($url=="#"){
-					$url="javascript:jump(__ITEM__&a=liquor_list&channelid=$res)";
-					$res=M("channel")->where()->save(array("url"=>$url));
+					$url="javascript:jump(__ITEM__&a=item_list&channelid=$res)";
+					$res=M("channel")->where("id='$channelid'")->save(array("url"=>$url));
 				}
 			}
 			

@@ -2,16 +2,16 @@
 <html>
 <head>
  <meta http-equiv=Content-Type content="text/html;charset=utf-8"/>
-<script src="http://dq//Public/js/jquery_1.js"></script>
-    <script type="text/javascript" charset="utf-8" src="http://dq//Public/js/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="http://dq//Public/js/ueditor/ueditor.all.js"></script>
+<script src="http://dq/Public/js/jquery_1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://dq/Public/js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://dq/Public/js/ueditor/ueditor.all.js"></script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="http://dq//Public/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://dq/Public/js/ueditor/lang/zh-cn/zh-cn.js"></script>
 
 
-    <link href="http://dq//Public/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://dq//Public/assets/css/font-awesome.min.css" />
+    <link href="http://dq/Public/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://dq/Public/assets/css/font-awesome.min.css" />
 
     <!--[if IE 7]>
       <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
     <!-- fonts -->
     <!-- ace styles -->
 
-    <link rel="stylesheet" href="http://dq//Public/assets/css/ace.css" />
-    <link rel="stylesheet" href="http://dq//Public/assets/css/ace-rtl.min.css" />
-    <link rel="stylesheet" href="http://dq//Public/assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="http://dq/Public/assets/css/ace.css" />
+    <link rel="stylesheet" href="http://dq/Public/assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="http://dq/Public/assets/css/ace-skins.min.css" />
 
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -30,7 +30,7 @@
     <!-- inline styles related to this page -->
     <!-- ace settings handler -->
 
-    <script src="http://dq//Public/assets/js/ace-extra.js"></script>
+    <script src="http://dq/Public/assets/js/ace-extra.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -83,17 +83,16 @@
 
                                 欢迎使用
                                 <strong class="green">
-                                    Ace后台管理系统
+                                    后台管理系统
                                     <small>(v1.2)</small>
                                 </strong>
-                                ,轻量级好用的后台管理系统模版.
                             </div>
 
                                         <div class="widget-body">
                                             <div class="widget-main no-padding">
+							<form name="form1" action="http://dq/index.php?m=Item&c=Index&a=uploadItem&channelid=<?php echo ($channelid); ?>" method="post" enctype="multipart/form-data">
                                                 <table class="table table-bordered table-striped">
 
-							<form name="form1" action="http://dq/index.php?m=Item&c=Index&a=uploadLiquor&channelid=<?php echo ($channelid); ?>" method="post" enctype="multipart/form-data">
                                                     <tbody>
 
 								    <tr>
@@ -108,9 +107,72 @@
 
 									    <td>价格:</td><td><input name="price"/></td>
 								    </tr>
+								    </tr>
+
+									    <td>销售总量:</td><td><input name="sold_total"/></td>
+								    </tr>
 								    <tr>
 									    <td>总量:</td><td><input name="total"/></td>
 								    </tr>
+								    <tr id="table_tr">
+									    <td>表格</td>
+									    <td>
+										    <select name="table_item_id" onchange="getTableItem()" id="table_select">
+											    <?php if(is_array($table_s)): foreach($table_s as $key=>$vo): ?><option value="<?php echo ($vo["id"]); ?>"><?php echo ($vo["title"]); ?></option><?php endforeach; endif; ?>
+									    
+										    </select>
+										    | <a target="_blank" href="http://dq/index.php?m=Item&c=Index&a=addTable">新增表格</a> | <a  href="javascript:delTable()">删除表格</a>
+									    </td>
+								    </tr>
+								    <?php if(is_array($table_info)): foreach($table_info as $key=>$vo): ?><tr class='new_tr'><td><?php echo ($vo); ?></td><td><input name='item_<?php echo ($key); ?>'/></td></tr><?php endforeach; endif; ?>
+
+								    <script>
+function delTable(){
+	var _this=$("#table_select option:selected");
+	var option=$("#table_select option:selected").val();
+	$.ajax({
+data:{"table_item_id":option},
+dataType:"json",
+url:"http://dq/index.php?m=Item&c=Index&a=delTable&jsonpcallback=?",
+type:"get",
+success:function(data){
+if(data==1){
+	_this.remove();
+	$(".new_tr").remove();
+}
+else {
+alert("删除失败");
+
+}
+}
+});
+
+
+}
+function getTableItem(){
+	var _this=$("#table_select");
+	var option=_this.find("option:selected").val();
+	$.ajax({
+data:{"table_item_id":option},
+dataType:"json",
+url:"http://dq/index.php?m=Item&c=Index&a=getTableItem&jsonpcallback=?",
+type:"get",
+success:function(data){
+$(".new_tr").remove();
+
+var str="";
+$.each(data,function(k,v){
+	str+="<tr class='new_tr'><td>"+v+"</td><td><input name='item["+k+"]'/></td></tr>";
+	});
+	$("#table_tr").after(str);
+}
+
+			});
+}
+
+								    
+								    
+								    </script>
 								    <tr>
 									    <td colspan="2">
 										    <div>
@@ -126,10 +188,10 @@
 								    </tr>
 								    <div style="display:none"><textarea name="content" id="textarea_content"></textarea></div>
 						    </tbody>
-						    </form>
 
 
 					    </table>
+						    </form>
 				    </div><!-- /widget-main -->
 			    </div><!-- /widget-body -->
 		    </div><!-- /widget-box -->

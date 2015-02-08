@@ -9,8 +9,10 @@ class IndexController extends Controller {
 
 
 	public function editBlock(){
-		$id=I("get.id");
-		$this->html_code="
+		$block_name=I("get.blockid");
+		$res=M("block")->where("title='$block_name'")->field('code')->find();
+		if(!$res){
+			$this->html_code="
 			<section id='slider' class='swipe' style='visibility: visible;'>
 			<section class='swipe-wrap'>
 
@@ -19,63 +21,107 @@ foreach(\$data as \$k => \$v){
 ?>
 	<figure>
 	<div class='wrap'>
-	<a href='product-detail.html'>
-	<img alt='this is pic1' src='<?php echo \$v ?>' />
+	<a href='\$v[link]'>
+	<img alt='this is pic1' src='<?php echo \$v[image_url] ?>' />
 	</a>
 	</div>
 	</figure>
 	<?php } ?>
 	</section>
 	</section> ";
+	}
+		else{
+			$this->html_code=$res['code'];
+		}
 
-$liquor=M("liquor")->limit(20)->select();
-$data=array();
-for($i=0;$i<count($liquor);$i++){
-	$one=$liquor[$i];
-	$image_url_arr=explode(",",$one['url']);
-	$image_url=$image_url_arr[0];
-	array_push($data,array("id"=>$one['id'],"title"=>$one['title'],"link"=>$one['link'],"image_url"=>$image_url));
-	
-}
+$data=M("channel")->where("type=1")->field("id,title")->select();
 $this->assign("data",$data);
 $this->display();
 		
 	}
 	public function doBlock(){
-		$block_url="./Public/block/";
-		$data=I("post.data");
+		$document_root=$_SERVER['DOCUMENT_ROOT'];
+		$block_url=$document_root."/Public/block/";
+		$itemid=I("post.data");
 		$type=I("post.type");
-		$id=I("post.blockid");
+		$blockid=I("post.blockid");
+		$auto=I("post.auto");
 		$html=$_POST['html_code'];//I("post.html_code");
-		if($type=="liquor"){
-			$db_name="liquor";
+		$itemid=substr($itemid,0,-1);
+		$auto=I("post.auto");
+		if($auto=="false"){
+			if(empty($itemid)||empty($blockid)||empty($html)){
+				echo $_GET['jsonpcallback'].'('.json_encode(-1).')'; 
+				exit;
+			}
 		}
-		else {
-			$db_name="123";
+		else{
+			if(empty($blockid)||empty($html)){
+				echo $_GET['jsonpcallback'].'('.json_encode(-1).')'; 
+				exit;
+			}
 		}
-		$data=substr($data,0,-1);
-		$db_name="liquor";
-		$res=M($db_name)->where("id in ($data)")->select();
+
+
+		$item_id_arr=explode(",",$itemid);
+
+		$res=array();
+		if($auto=="true")  {
+			$res=M("item")->order("creat_at desc")->limit("5")->select();
+		}
+		else{
+			for($i=0;$i<count($item_id_arr);$i++){
+				$id=$item_id_arr[$i];
+				$one=M("item")->where("id=$id")->find();
+				array_push($res,$one);
+
+			}
+		}
+
 
 		$image_url_arr=array();
 
-
+		$data=array();
 		for($i=0;$i<count($res);$i++){
-			$url=$res[$i]['url'];
+			$link=$res[$i]['web_url'];
+			$url=$res[$i]['image_url'];
 			$url_arr=explode(",",$url);
-			array_push($image_url_arr,$url_arr[0]);
-			
-		}
+			array_push($data,array('title'=>$res[$i]['title'],'image_url'=>$url_arr[0],'link'=>$web_url));
 
-		$data=$image_url_arr;
-		$block_url=$block_url.$id.".html";
+		}
+		$block_url=$block_url.$blockid.".html";
 		$html=htmlspecialchars_decode($html);
 		$rs=file_put_contents($block_url,$html);
+
+
+
+
 		ob_start();
 		include($block_url);
 		$res=ob_get_contents();
+		ob_clean();
+		$block_res=M("block")->where("title='$blockid'")->find();
+		if($block_res){
+			/*
+				| id      | int(32)      | YES  |     | NULL    |       |
+				| content | mediumtext   | YES  |     | NULL    |       |
+				| code    | mediumtext   | YES  |     | NULL    |       |
+				| itemid  | varchar(32)  | YES  |     | NULL    |       |
+				| contain | varchar(256) | YES  |     | NULL    |       |
+				| type    | varchar(32)  | YES  |     | NULL    |      
+			 */
+
+			$block_res=M("block")->where("title='$blockid'")->save(array("code"=>$html,"content"=>$res,"itemid"=>$itemid,"url"=>$block_url));
+		}
+		else{
+			$block_res=M("block")->add(array("title"=>'$blockid',"code"=>$html,"content"=>$res,"itemid"=>$itemid,"url"=>$block_url));
+		}
 		$rs=file_put_contents($block_url,$res);
-		$this->success("修改成功");
+		if($rs)
+			echo $_GET['jsonpcallback'].'('.json_encode(1).')'; 
+		else
+			echo $_GET['jsonpcallback'].'('.json_encode(3).')'; 
+		//$this->success("修改成功");
 	}
 	public function genBlock(){
 

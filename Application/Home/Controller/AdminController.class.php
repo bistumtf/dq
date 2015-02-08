@@ -115,19 +115,23 @@ class AdminController extends Controller {
 		ob_clean();
 		$res=file_put_contents($cache_url."home_left_list.html",$str);
 		if($res) $this->success("生成列表成功","index.php?m=Home&c=Admin&a=index");
+		else{
+			$this->error("生成失败");
+		}
 
 	}
 	public function addChannel(){
 		if(IS_POST){
 			$title=I("post.title");
-			$url="javascript:jump(".$_POST['url'].")";
+			$url="javascript:jump('".$_POST['url']."')";
 			$icon=I("post.icon");
 			$channelid=I("get.channelid");
+			$type=I("post.type");
 			$child=I("post.child");
 			if(!empty($channelid)){
 				$parent=$channelid;
-				$res=M("channel")->add(array("title"=>$title,"url"=>$url,"icon"=>$icon,"child"=>$child,"parent"=>"$parent,"));
-				if($url=="javascript:jump(#)"){
+				$res=M("channel")->add(array("title"=>$title,"url"=>$url,"icon"=>$icon,"child"=>$child,"parent"=>"$parent,","type"=>$type));
+				if($url=="javascript:jump('#')"){
 					$url="javascript:jump('__ITEM__&a=liquor_list&channelid=$res')";
 					$r_res=M("channel")->where("id=$res")->save(array("url"=>$url));
 				}
@@ -146,10 +150,10 @@ class AdminController extends Controller {
 				}
 			}
 			else {
-				$res=M("channel")->add(array("title"=>$title,"url"=>$url,"icon"=>$icon,"child"=>$child));
-				if($url=="#"){
-					$url="javascript:jump('__ITEM__&a=liquor_list&channelid=$res')";
-					$res=M("channel")->where()->save(array("url"=>$url));
+				$res=M("channel")->add(array("title"=>$title,"url"=>$url,"icon"=>$icon,"child"=>$child,"type"=>$type));
+				if($url=="javascript:jump('#')"){
+					$url="javascript:jump('__ITEM__&a=item_list&channelid=$res')";
+					$res=M("channel")->where("id='$res'")->save(array("url"=>$url));
 				}
 			}
 			
@@ -249,24 +253,6 @@ class AdminController extends Controller {
 	public function index(){
 		$cache_url=$_SERVER['DOCUMENT_ROOT']."/Public/Cache/";
 		$this->home_left_list=file_get_contents($cache_url."home_left_list.html");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		$this->display("index");
 	}
 	public function login(){

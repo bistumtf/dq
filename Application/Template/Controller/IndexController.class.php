@@ -27,38 +27,120 @@ class IndexController extends Controller {
 	 * +----------+--------------+------+-----+---------+----------------+
 	 */
 
+
 	public function pc(){
 		$id=I("get.id");
 		$res=M("liquor")->where("id='$id'")->find();
 	}
 	public function phone(){
 		$id=I("get.id");
-		$res=M("liquor")->where("id='$id'")->find();
-		$image_url_arr=split(",",$res['url']);
+		$res=M("item")->where("id='$id'")->find();
+		$image_url_arr=split(",",$res['image_url']);
+		$table_id=$res['table_id'];
+		$table=M("table_item")->where("id=$table_id")->find();
+
+
 
 		$res['content']=htmlspecialchars_decode($res['content']);
+		eval('$item_table_content='.$res['table_content'].';');
+		eval('$table_content='.$table['content'].';');
+		$array=array();
+		for($i=0;$i<count($item_table_content);$i++){
+			$array[$table_content[$i]]=$item_table_content[$i];
+		}
+
+		$this->table_info=$array;
 		$this->assign("data",$res);
 		$this->assign("image_url",$image_url_arr);
-		$this->display("liquor_detail");
+		$this->display("item_detail");
 		//$this->display("phone_template");
 	}
 	public function create(){
 		$id=I("get.id");
-		$res=M("liquor")->where("id='$id'")->find();
-		$image_url_arr=split(",",$res['url']);
+		$res=M("item")->where("id='$id'")->find();
+		$image_url_arr=split(",",$res['image_url']);
+		$table_id=$res['table_id'];
+		$table=M("table_item")->where("id=$table_id")->find();
+
+
+		eval('$item_table_content='.$res['table_content'].';');
+		if(!empty($table))
+			eval('$table_content='.$table['content'].';');
+		$array=array();
+		for($i=0;$i<count($item_table_content);$i++){
+			$array[$table_content[$i]]=$item_table_content[$i];
+		}
+
+		$res['content']=htmlspecialchars_decode($res['content']);
+		$this->table_info=$array;
 		$this->assign("data",$res);
 		$this->assign("image_url",$image_url_arr);
-		$content=$this->fetch("liquor_detail");
-		$file_url=$res['link'];
-		$res=file_put_contents($file_url,$content);
+
+
+
+
+		$document_root=$_SERVER['DOCUMENT_ROOT'];
+		$date=date("Ymd",time());
+		$url=$document_root."/html/".$date;
+		if(!is_dir($url)){
+			mkdir($url,0777);
+		}
+
+
+
+
+		$web_url="http://".$_SERVER['SERVER_NAME']."/html/".$date;;
+		$after="/".md5($res['title'])."_".$id."_".rand(1,100).".html";
+		if(!empty($res['link'])){
+			$url=$res['link'];
+			$web_url=$res['web_url'];
+		}
+		else {
+			$url=$url.$after;
+			$web_url=$web_url.$after;
+		}
+
+
+
+		$content=$this->fetch("item_detail");
+
+		$res=file_put_contents($url,$content);
 		if($res){
-			M("liquor")->where("id='$id'")->save(array("link"=>$file_url));
+
+			M("item")->where("id='$id'")->save(array("link"=>$url,"status"=>2,"web_url"=>$web_url));
 			$this->success("生成成功");
 		}
 		else{
 			$this->error("生成失败");
 		}
-			exit;
+		exit;
+
+
+
+
+	}
+	public function create_page(){
+		$id=I("get.id");
+		$res=M("item")->where("id='$id'")->find();
+		$image_url_arr=split(",",$res['image_url']);
+		$table_id=$res['table_id'];
+		$table=M("table_item")->where("id=$table_id")->find();
+
+
+
+		$res['content']=htmlspecialchars_decode($res['content']);
+		eval('$item_table_content='.$res['table_content'].';');
+		eval('$table_content='.$table['content'].';');
+		$array=array();
+		for($i=0;$i<count($item_table_content);$i++){
+			$array[$table_content[$i]]=$item_table_content[$i];
+		}
+
+		$this->table_info=$array;
+		$this->assign("data",$res);
+		$this->assign("image_url",$image_url_arr);
+		$this->display("item_detail");
+
 
 
 

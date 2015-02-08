@@ -83,17 +83,16 @@
 
                                 欢迎使用
                                 <strong class="green">
-                                    Ace后台管理系统
+                                    后台管理系统
                                     <small>(v1.2)</small>
                                 </strong>
-                                ,轻量级好用的后台管理系统模版.
                             </div>
 
                                         <div class="widget-body">
                                             <div class="widget-main no-padding">
+							<form name="form1" action="__INDEX__&a=uploadItem&channelid={$channelid}" method="post" enctype="multipart/form-data">
                                                 <table class="table table-bordered table-striped">
 
-							<form name="form1" action="__INDEX__&a=uploadLiquor&channelid={$channelid}" method="post" enctype="multipart/form-data">
                                                     <tbody>
 
 								    <tr>
@@ -108,9 +107,76 @@
 
 									    <td>价格:</td><td><input name="price"/></td>
 								    </tr>
+								    </tr>
+
+									    <td>销售总量:</td><td><input name="sold_total"/></td>
+								    </tr>
 								    <tr>
 									    <td>总量:</td><td><input name="total"/></td>
 								    </tr>
+								    <tr id="table_tr">
+									    <td>表格</td>
+									    <td>
+										    <select name="table_item_id" onchange="getTableItem()" id="table_select">
+											    <foreach name="table_s" item="vo"  key="key">
+											    <option value="{$vo.id}">{$vo.title}</option>
+											    </foreach>
+									    
+										    </select>
+										    | <a target="_blank" href="__INDEX__&a=addTable">新增表格</a> | <a  href="javascript:delTable()">删除表格</a>
+									    </td>
+								    </tr>
+								    <foreach name="table_info" item="vo" key="key">
+								    <tr class='new_tr'><td>{$vo}</td><td><input name='item_{$key}'/></td></tr>
+								    </foreach>
+
+								    <script>
+function delTable(){
+	var _this=$("#table_select option:selected");
+	var option=$("#table_select option:selected").val();
+	$.ajax({
+data:{"table_item_id":option},
+dataType:"json",
+url:"__INDEX__&a=delTable&jsonpcallback=?",
+type:"get",
+success:function(data){
+if(data==1){
+	_this.remove();
+	$(".new_tr").remove();
+}
+else {
+alert("删除失败");
+
+}
+}
+});
+
+
+}
+function getTableItem(){
+	var _this=$("#table_select");
+	var option=_this.find("option:selected").val();
+	$.ajax({
+data:{"table_item_id":option},
+dataType:"json",
+url:"__INDEX__&a=getTableItem&jsonpcallback=?",
+type:"get",
+success:function(data){
+$(".new_tr").remove();
+
+var str="";
+$.each(data,function(k,v){
+	str+="<tr class='new_tr'><td>"+v+"</td><td><input name='item["+k+"]'/></td></tr>";
+	});
+	$("#table_tr").after(str);
+}
+
+			});
+}
+
+								    
+								    
+								    </script>
 								    <tr>
 									    <td colspan="2">
 										    <div>
@@ -126,10 +192,10 @@
 								    </tr>
 								    <div style="display:none"><textarea name="content" id="textarea_content"></textarea></div>
 						    </tbody>
-						    </form>
 
 
 					    </table>
+						    </form>
 				    </div><!-- /widget-main -->
 			    </div><!-- /widget-body -->
 		    </div><!-- /widget-box -->

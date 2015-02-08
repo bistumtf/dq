@@ -3,13 +3,14 @@ return array(
 	//'配置项'=>'配置值'
 
 	'TMPL_PARSE_STRING' =>array(
-		'__ROOT__' => 'http://dq/', // 更改默认的/Public 替换规则
-		'__TEMPLATE__' => 'http://dq/index.php?m=Template&c=Index',
-		'__ITEM__' => 'http://dq/index.php?m=Item&c=Index',
-		'__PUBLIC__' => 'http://dq//Public/', // 更改默认的/Public 替换规则
-		'__INDEX__' => 'http://dq/index.php?m=Item&c=Index', // 增加新的JS类库路径替换规则
-		'__UPLOAD__' => '/Uploads', // 增加新的上传路径替换规则
-		'__JS__' => 'http://dq//Public/js/', // 增加新的JS类库路径替换规则
+		'__ADMIN__' => APP_WEB_URL.'index.php?m=Home&c=Admin',
+		'__ROOT__' => APP_WEB_URL, // 更改默认的/Public 替换规则
+		'__TEMPLATE__' => APP_WEB_URL.'index.php?m=Template&c=Index',
+		'__ITEM__' => APP_WEB_URL.'index.php?m=Item&c=Index',
+		'__PUBLIC__' => APP_WEB_URL.'Public/', // 更改默认的/Public 替换规则
+		'__INDEX__' => APP_WEB_URL.'index.php?m=Item&c=Index', // 增加新的JS类库路径替换规则
+		'__UPLOAD__' =>APP_WEB_URL. 'Uploads', // 增加新的上传路径替换规则
+		'__JS__' => APP_WEB_URL.'Public/js/', // 增加新的JS类库路径替换规则
 	)
 				    /*
 	    __ROOT__： 会替换成当前网站的地址（不含域名）

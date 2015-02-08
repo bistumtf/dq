@@ -7,8 +7,8 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link rel="stylesheet" href="/Public/swipe/style/base.css" type="text/css"/>
-    <link rel="stylesheet" href="/Public/swipe/style/common.css" type="text/css"/>
+    <link rel="stylesheet" href="http://dq//Public/swipe/style/base.css" type="text/css"/>
+    <link rel="stylesheet" href="http://dq//Public/swipe/style/common.css" type="text/css"/>
 	<link rel="apple-touch-icon-precomposed" href="http://image.bitautoimg.com/wap/ios/images/57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://image.bitautoimg.com/wap/ios/images/72x72.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://image.bitautoimg.com/wap/ios/images/114x114.png" />
@@ -29,45 +29,45 @@
 			</section>
 			<nav id="top-menu-content" class="top-menu-content h0">
 				<ul>
-					<li><a href="index.html">首页</a></li>
-					<li><a href="more.html">酒品人生</a></li>
-					<li><a href="gift_more.html">礼品定制</a></li>
-					<li><a href="news_list.html">资讯中心</a></li>
-					<li><a href="about_us.html">关于我们</a></li>
-					<li><a href="contact_us.html">联系我们</a></li>
+					<li><a href="http://dq/mobile_index.html">首页</a></li>
+					<li><a href="http://dq/index.php?m=Item&c=Index&a=getMore&channelid=51">礼品定制</a></li>
+					<li><a href="http://dq/index.php?m=News&c=Index&a=new_list">资讯中心</a></li>
+					<li><a href="http://dq/html/about_us.html">关于我们</a></li>
+					<li><a href="http://dq/html/contact_us.html">联系我们</a></li>
 				</ul>
 			</nav>
 		</header>
 		<!-- 轮播start-->
-			<?php echo getBlock(1);?>
+			<?php echo getBlock('homePage_1');?>
 		<!-- 轮播end-->
 
 		<nav class="nav wraper">
 			<ul>
-				<li><a href="more.html"><i class="drinks-icon"></i><strong>酒品人生</strong></a></li>
-				<li><a href="gift_more.html"><i class="gift-icon"></i><strong>礼品定制</strong></a></li>
-				<li><a href="news_list.html"><i class="news-icon"></i><strong>资讯中心</strong></a></li>
-				<li><a href="contact_us.html"><i class="contact-icon"></i><strong>联系我们</strong></a></li>
+				<li><a href="http://dq/index.php?m=Item&c=Index&a=getMore&channelid=51"><i class="gift-icon"></i><strong>礼品定制</strong></a></li>
+				<li><a href="http://dq/index.php?m=News&c=Index&a=new_list"><i class="news-icon"></i><strong>资讯中心</strong></a></li>
+				<li><a href="http://dq/html/about_us.html"><i class="about-icon"></i><strong>关于我们</strong></a></a></li>
+				<li><a href="http://dq/html/contact_us.html"><i class="contact-icon"></i><strong>联系我们</strong></a></li>
 			</ul>
 		</nav>
 		
 		<section class="module-list wraper">
 			<section class="hd cf">
 				<h2 class="fl">礼品定制</h2>
-				<a href="more.html" class="fr">更多案例</a>
+				<a href="http://dq/index.php?m=Item&c=Index&a=getMore&channelid=51" class="fr">更多案例</a>
 			</section>
 			<section class="bd">
+					<?php echo getBlock('homePage_2');?>
 				<ul class="cf data-list1">
 					<li>
 						<a href="gift-detail.html">
 							<strong>礼品名称</strong>
-							<img src="/Public/swipe/images/tem/gift-tem.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/gift-tem.jpg"  alt="" />
 						</a>
 					</li>
 					<li>
 					<a href="gift-detail.html">
 							<strong>礼品名称</strong>
-							<img src="/Public/swipe/images/tem/gift-tem.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/gift-tem.jpg"  alt="" />
 						</a>
 					</li>
 				</ul>
@@ -75,19 +75,19 @@
 					<li>
 						<a href="gift-detail.html">
 							<strong>礼品名称</strong>
-							<img src="/Public/swipe/images/tem/gift-tem.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/gift-tem.jpg"  alt="" />
 						</a>
 					</li>
 					<li>
 						<a href="gift-detail.html">
 							<strong>礼品名称</strong>
-							<img src="/Public/swipe/images/tem/gift-tem.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/gift-tem.jpg"  alt="" />
 						</a>
 					</li>
 					<li>
 						<a href="gift-detail.html">
 							<strong>礼品名称</strong>
-							<img src="/Public/swipe/images/tem/gift-tem.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/gift-tem.jpg"  alt="" />
 						</a>
 					</li>
 				</ul>
@@ -97,20 +97,22 @@
 		<section class="module-list wraper">
 			<section class="hd cf">
 				<h2 class="fl">酒品人生</h2>
+				<a href="http://dq/index.php?m=Item&c=Index&a=getMore&channelid=35" class="fr">更多案例</a>
 				<a href="more.html" class="fr">更多案例</a>
 			</section>
 			<section class="bd">
+					<?php echo getBlock('homePage_3');?>
 				<ul class="cf data-list1">
 					<li>
 						<a href="product-detail.html">
 							<strong>40度法国轩尼诗</strong>
-							<img src="/Public/swipe/images/tem/tem1-1.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/tem1-1.jpg"  alt="" />
 						</a>
 					</li>
 					<li>
 						<a href="product-detail.html">
 							<strong>甘肃皇台95至尊</strong>
-							<img src="/Public/swipe/images/tem/tem1-2.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/tem1-2.jpg"  alt="" />
 						</a>
 					</li>
 				</ul>
@@ -118,19 +120,19 @@
 					<li>
 						<a href="product-detail.html">
 							<strong>拉菲红酒原装进口</strong>
-							<img src="/Public/swipe/images/tem/tem1-3.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/tem1-3.jpg"  alt="" />
 						</a>
 					</li>
 					<li>
 						<a href="product-detail.html">
 							<strong>拉菲红酒原装进口</strong>
-							<img src="/Public/swipe/images/tem/tem1-3.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/tem1-3.jpg"  alt="" />
 						</a>
 					</li>
 					<li>
 						<a href="product-detail.html">
 							<strong>拉菲红酒原装进口</strong>
-							<img src="/Public/swipe/images/tem/tem1-3.jpg"  alt="" />
+							<img src="http://dq//Public/swipe/images/tem/tem1-3.jpg"  alt="" />
 						</a>
 					</li>
 				</ul>
@@ -144,8 +146,8 @@
 	</section>
 	
 	
-	<script src="/Public/swipe/js/zepto.min.js"></script>
-	<script src="/Public/swipe/js/swipe.js"></script>
+	<script src="http://dq//Public/swipe/js/zepto.min.js"></script>
+	<script src="http://dq//Public/swipe/js/swipe.js"></script>
 	<script>
 	
 		$(function(){

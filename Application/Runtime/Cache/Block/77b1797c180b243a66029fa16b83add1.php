@@ -91,44 +91,91 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 				<div class="widget-body">
 					<div class="widget-main no-padding">
 
-							<a href="javascript:;" id="gansu">甘肃土特产</a>
-							<div class="left" style="width:60%;border:1px solid black;height:1000px">
-								<?php
- for($i=0;$i<count($data);$i++){ $one=$data[$i]; echo '
-								<div style="float:left;float:left;padding:10px 20px 40px 20px" itemid="'.$one['id'].'"><div><img style="width:200px;height:150px" src="'.$one['image_url'].'"></img></div><span>'.$one['title'].'</span></div>
-								'; } ?>
-
-								<div></div>
-							</div>
-							<hr>
-							<input type="button" value="确认" id="block_1" class="block_submit"/>
-
-						<hr>
-						<div class="html_code">
-							<textarea id="html_code">
-								<?php echo ($html_code); ?>
-							</textarea>
-
+						<div class="item_line">
+							<?php if(is_array($data)): foreach($data as $key=>$vo): ?><div style="padding:0px 10px">
+								<a href="javascript:;" channelid="<?php echo ($vo["id"]); ?>"><?php echo ($vo["title"]); ?></a>
+							</div><?php endforeach; endif; ?>
 						</div>
+							<div class="left" style="float:left;width:60%;border:1px solid black;height:1000px">
 
-						<script>
+							</div>
+							<div class="right" style="margin-left:30px;float:left;width:35%;border:1px solid black;height:1000px">
+								<span style="text-align:center">线上选择</span><hr>
+								<!--			<?php if(is_array($data)): foreach($data as $key=>$vo): ?><div class='left_div' style='float:left;padding:10px 20px 40px 20px' itemid='"+v.id+"'><div><img style='width:200px;height:150px' src='"+v.image_url+"'></img></div><div style='text-align:center'><span>"+v.title+"</span></div></div>
+							<li value=''><div><img src=''></img><span></span></div></li><?php endforeach; endif; ?>-->
+							</div>
 
-	//$(".left ul").append("<li value='"+v.id+"'><div><img src='"+v.image_url+"'></img><span>"+v.title+"</span></div></li>");
+							<hr>
+							<div class="html_code">
+								<textarea id="html_code" style="width:60%;height:300px">
+									<?php echo ($html_code); ?>
+								</textarea>
 
+								<hr>
+								机选 : <input type="checkbox" id="auto_gen"/>
+								    |    <input type="button" value="确认" id="block_1" class="block_submit"/>
+							</div>
+
+							<script>
+
+//$(".left ul").append("<li value='"+v.id+"'><div><img src='"+v.image_url+"'></img><span>"+v.title+"</span></div></li>");
+
+
+						$(".item_line a").click(function(){
+								$(".left").html('');
+								var channelid=$(this).attr("channelid");
+								$.ajax({
+url:'http://dq/index.php?m=Item&c=Index&a=getItem&channelid='+channelid+'&jsonpcallback=?',
+data:{},
+dataType:"json",
+type:"get",
+success:function(data){
+var str="";
+$.each(data,function(k,v){
+	str+="<div class='left_div' style='float:left;padding:10px 20px 40px 20px' itemid='"+v.id+"'><div><img style='width:200px;height:150px' src='"+v.image_url+"'></img></div><div style='text-align:center'><span>"+v.title+"</span></div></div>";
+
+})
+$(".left").append(str);
+$(".left .left_div").click(function(){
+	var _this=$(this);
+	$(".right").append(_this.clone());
+$(".right .left_div").click(function(){
+	$(this).remove();
+	});
+	});
+
+
+
+}
+});
+								});
+$(".right .left_div").click(function(){
+	$(this).remove();
+	});
 function block_start(){
 	$(".block_submit").click(function(){
 			var str="";
-			var html_code=$("#html_code").html();
-			$(".right li").each(function(){
-				str+=$(this).attr("value")+",";
+			var html_code=$("#html_code").val();
+			var auto=$("#auto_gen").is(":checked");
+			$(".right .left_div").each(function(){
+				str+=$(this).attr("itemid")+",";
 				});
 			$.ajax({
-url:'http://dq/index.php?m=Block&c=Index&a=doBlock',
-data:{"data":str,"type":"liquor","blockid":"<?php echo $_GET['blockid'];?>","html_code":html_code},
+url:'http://dq/index.php?m=Block&c=Index&a=doBlock&jsonpcallback=?',
+data:{"data":str,"auto":auto,"type":"liquor","blockid":"<?php echo $_GET['blockid'];?>","html_code":html_code},
 dataType:"json",
 type:"post",
 success:function(data){
-alert(data);
+if(data=='-1'){
+alert("数据不完整");
+}
+else if(data=='1'){
+alert("修改成功");
+}
+else{
+alert("未知错误（可能代码有误）");
+}
+
 }
 });
 			});
@@ -167,12 +214,6 @@ function jumpto(param){
 
 
 	</div><!-- /.col -->
-					<div class="right" style="position:fixed;top:40px;right:40px">
-						<span>线上选择</span>
-						<ul>
-							<?php if(is_array($data)): foreach($data as $key=>$vo): ?><li value=''><div><img src=''></img><span></span></div></li><?php endforeach; endif; ?>
-						</ul>
-					</div>
 </div><!-- /.row -->
 		</div><!-- /.page-content -->
 	    </div><!-- /.main-content -->

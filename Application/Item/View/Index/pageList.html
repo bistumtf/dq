@@ -83,11 +83,7 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 
 										<th>
 											<i class="icon-caret-right blue"></i>
-											洒名	
-										</th>
-										<th>
-											<i class="icon-caret-right blue"></i>
-											类型	
+											名称
 										</th>
 										<th>
 											<i class="icon-caret-right blue"></i>
@@ -101,10 +97,9 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 											<i class="icon-caret-right blue"></i>
 											剩余	
 										</th>
-
-										<th class="hidden-480">
+										<th>
 											<i class="icon-caret-right blue"></i>
-											状态
+											状态 	
 										</th>
 										<th style="" colspan="3" class="hidden-480">
 											<i class="icon-caret-right blue"></i>
@@ -119,17 +114,22 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 								<tr>
 									<td>{$vo.id}</td>
 									<td>{$vo.title}</td>
-									<td>{$vo.type}</td>
-									<td>{$vo.creattime|date="Y-m-d",###}</td>
+									<td>{$vo.creat_at|date="Y-m-d",###}</td>
 									<td>
 										<b class="green">{$vo.price}</b>
 									</td>
+									<td>
+										<if condition="$vo.status == 3"><b class="red">已下线</b>
+										<elseif condition="$vo.status eq 2"/><b class="green">已上线</b>
+										<else /> <b class="green">编辑完成</b>
+										</if>
+									</td>
 									<td>{$vo.total}</td>
-									<td></td>
 									<td><a target='_blank' href='__ITEM__&a=change&id={$vo.id}'>修改</a></td>
 									<td><a target='_blank' href='__TEMPLATE__&a=pc&id={$vo.id}'>pc预览</a></td>
 									<td><a target='_blank' href='__TEMPLATE__&a=phone&id={$vo.id}'>手机预览</a></td>
 									<td><a target='_self' href='__TEMPLATE__&a=create&id={$vo.id}'>生成页面</a></td>
+									<td><a target='_self' href='__ITEM__&a=del&id={$vo.id}'>下线</a></td>
 								</tr>
 								</foreach>
 								</tbody>

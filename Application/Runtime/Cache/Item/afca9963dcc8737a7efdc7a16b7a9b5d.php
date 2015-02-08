@@ -8,33 +8,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- basic styles -->
 
-<script src="http://dq//Public/js/jquery_1.js"></script>
-<link href="http://dq//Public/assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="http://dq//Public/assets/css/font-awesome.min.css" />
+<script src="http://dq/Public/js/jquery_1.js"></script>
+<link href="http://dq/Public/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="http://dq/Public/assets/css/font-awesome.min.css" />
 
 <!--[if IE 7]>
-      <link rel="stylesheet" href="http://dq//Public/assets/css/font-awesome-ie7.min.css" />
+      <link rel="stylesheet" href="http://dq/Public/assets/css/font-awesome-ie7.min.css" />
     <![endif]-->
 <!-- page specific plugin styles -->
 <!-- fonts -->
 <!-- ace styles -->
 
-<link rel="stylesheet" href="http://dq//Public/assets/css/ace.css" />
-<link rel="stylesheet" href="http://dq//Public/assets/css/ace-rtl.min.css" />
-<link rel="stylesheet" href="http://dq//Public/assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="http://dq/Public/assets/css/ace.css" />
+<link rel="stylesheet" href="http://dq/Public/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="http://dq/Public/assets/css/ace-skins.min.css" />
 
 <!--[if lte IE 8]>
-      <link rel="stylesheet" href="http://dq//Public/assets/css/ace-ie.min.css" />
+      <link rel="stylesheet" href="http://dq/Public/assets/css/ace-ie.min.css" />
     <![endif]-->
 <!-- inline styles related to this page -->
 <!-- ace settings handler -->
 
-<script src="http://dq//Public/assets/js/ace-extra.js"></script>
+<script src="http://dq/Public/assets/js/ace-extra.js"></script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-    <script src="http://dq//Public/assets/js/html5shiv.js"></script>
-    <script src="http://dq//Public/assets/js/respond.min.js"></script>
+    <script src="http://dq/Public/assets/js/html5shiv.js"></script>
+    <script src="http://dq/Public/assets/js/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -83,11 +83,7 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 
 										<th>
 											<i class="icon-caret-right blue"></i>
-											洒名	
-										</th>
-										<th>
-											<i class="icon-caret-right blue"></i>
-											类型	
+											名称
 										</th>
 										<th>
 											<i class="icon-caret-right blue"></i>
@@ -101,10 +97,9 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 											<i class="icon-caret-right blue"></i>
 											剩余	
 										</th>
-
-										<th class="hidden-480">
+										<th>
 											<i class="icon-caret-right blue"></i>
-											状态
+											状态 	
 										</th>
 										<th style="" colspan="3" class="hidden-480">
 											<i class="icon-caret-right blue"></i>
@@ -118,17 +113,21 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 								<?php if(is_array($data)): foreach($data as $key=>$vo): ?><tr>
 									<td><?php echo ($vo["id"]); ?></td>
 									<td><?php echo ($vo["title"]); ?></td>
-									<td><?php echo ($vo["type"]); ?></td>
-									<td><?php echo (date("Y-m-d",$vo["creattime"])); ?></td>
+									<td><?php echo (date("Y-m-d",$vo["creat_at"])); ?></td>
 									<td>
 										<b class="green"><?php echo ($vo["price"]); ?></b>
 									</td>
+									<td>
+										<?php if($vo["status"] == 3): ?><b class="red">已下线</b>
+										<?php elseif($vo["status"] == 2): ?><b class="green">已上线</b>
+										<?php else: ?> <b class="green">编辑完成</b><?php endif; ?>
+									</td>
 									<td><?php echo ($vo["total"]); ?></td>
-									<td></td>
 									<td><a target='_blank' href='http://dq/index.php?m=Item&c=Index&a=change&id=<?php echo ($vo["id"]); ?>'>修改</a></td>
 									<td><a target='_blank' href='http://dq/index.php?m=Template&c=Index&a=pc&id=<?php echo ($vo["id"]); ?>'>pc预览</a></td>
 									<td><a target='_blank' href='http://dq/index.php?m=Template&c=Index&a=phone&id=<?php echo ($vo["id"]); ?>'>手机预览</a></td>
 									<td><a target='_self' href='http://dq/index.php?m=Template&c=Index&a=create&id=<?php echo ($vo["id"]); ?>'>生成页面</a></td>
+									<td><a target='_self' href='http://dq/index.php?m=Item&c=Index&a=del&id=<?php echo ($vo["id"]); ?>'>下线</a></td>
 								</tr><?php endforeach; endif; ?>
 								</tbody>
 							</table>
@@ -141,48 +140,48 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 
 	</div><!-- /widget-main -->
 </div><!-- /widget-body -->
-<script src="http://dq//Public/assets/js/jquery-2.0.3.min.js"></script>
+<script src="http://dq/Public/assets/js/jquery-2.0.3.min.js"></script>
 <!-- <![endif]-->
 <!--[if IE]>
-    <script src="http://dq//Public/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="http://dq/Public/assets/js/jquery-1.10.2.min.js"></script>
     <![endif]-->
 <!--[if !IE]> -->
 
 <script type="text/javascript">
-window.jQuery || document.write("<script src='http://dq//Public/assets/js/jquery-2.0.3.min.js'>" + "<" + "script>");
+window.jQuery || document.write("<script src='http://dq/Public/assets/js/jquery-2.0.3.min.js'>" + "<" + "script>");
 </script>
 
 <!-- <![endif]-->
 <!--[if IE]>
     <script type="text/javascript">
-     window.jQuery || document.write("<script src='http://dq//Public/assets/js/jquery-1.10.2.min.js'>"+"<"+"script>");
+     window.jQuery || document.write("<script src='http://dq/Public/assets/js/jquery-1.10.2.min.js'>"+"<"+"script>");
     </script>
     <![endif]-->
 
 <script type="text/javascript">
-if ("ontouchend" in document) document.write("<script src='http://dq//Public/assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
+if ("ontouchend" in document) document.write("<script src='http://dq/Public/assets/js/jquery.mobile.custom.min.js'>" + "<" + "script>");
 </script>
-<script src="http://dq//Public/assets/js/bootstrap.min.js"></script>
-<script src="http://dq//Public/assets/js/typeahead-bs2.min.js"></script>
+<script src="http://dq/Public/assets/js/bootstrap.min.js"></script>
+<script src="http://dq/Public/assets/js/typeahead-bs2.min.js"></script>
 
 <!-- page specific plugin scripts -->
 <!--[if lte IE 8]>
-      <script src="http://dq//Public/assets/js/excanvas.min.js"></script>
+      <script src="http://dq/Public/assets/js/excanvas.min.js"></script>
     <![endif]-->
 
-<script src="http://dq//Public/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="http://dq//Public/assets/js/jquery.ui.touch-punch.min.js"></script>
-<script src="http://dq//Public/assets/js/jquery.slimscroll.min.js"></script>
-<script src="http://dq//Public/assets/js/jquery.easy-pie-chart.min.js"></script>
-<script src="http://dq//Public/assets/js/jquery.sparkline.min.js"></script>
-<script src="http://dq//Public/assets/js/flot/jquery.flot.min.js"></script>
-<script src="http://dq//Public/assets/js/flot/jquery.flot.pie.min.js"></script>
-<script src="http://dq//Public/assets/js/flot/jquery.flot.resize.min.js"></script>
+<script src="http://dq/Public/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="http://dq/Public/assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="http://dq/Public/assets/js/jquery.slimscroll.min.js"></script>
+<script src="http://dq/Public/assets/js/jquery.easy-pie-chart.min.js"></script>
+<script src="http://dq/Public/assets/js/jquery.sparkline.min.js"></script>
+<script src="http://dq/Public/assets/js/flot/jquery.flot.min.js"></script>
+<script src="http://dq/Public/assets/js/flot/jquery.flot.pie.min.js"></script>
+<script src="http://dq/Public/assets/js/flot/jquery.flot.resize.min.js"></script>
 
 <!-- ace scripts -->
 
-<script src="http://dq//Public/assets/js/ace-elements.min.js"></script>
-<script src="http://dq//Public/assets/js/ace.js"></script>
+<script src="http://dq/Public/assets/js/ace-elements.min.js"></script>
+<script src="http://dq/Public/assets/js/ace.js"></script>
 
 <!-- inline scripts related to this page -->
 

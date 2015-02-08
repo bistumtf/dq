@@ -19,6 +19,8 @@ define('APP_DEBUG',True);
 
 define('APP_WEB_URL',"http://".$_SERVER['SERVER_NAME']."/");
 
+define("APP_REAL_URL",$_SERVER['DOCUMENT_ROOT']);
+
 // 定义应用目录
 define('APP_PATH','./Application/');
 

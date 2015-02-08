@@ -29,34 +29,34 @@
 			</section>
 			<nav id="top-menu-content" class="top-menu-content h0">
 				<ul>
-					<li><a href="index.html">首页</a></li>
-					<li><a href="more.html">酒品人生</a></li>
-					<li><a href="gift_more.html">礼品定制</a></li>
-					<li><a href="news_list.html">资讯中心</a></li>
-					<li><a href="about_us.html">关于我们</a></li>
-					<li><a href="contact_us.html">联系我们</a></li>
+					<li><a href="__ROOT__mobile_index.html">首页</a></li>
+					<li><a href="__ITEM__&a=getMore&channelid=51">礼品定制</a></li>
+					<li><a href="__NEWS__&a=new_list">资讯中心</a></li>
+					<li><a href="__ROOT__html/about_us.html">关于我们</a></li>
+					<li><a href="__ROOT__html/contact_us.html">联系我们</a></li>
 				</ul>
 			</nav>
 		</header>
 		<!-- 轮播start-->
-			{:getBlock(1)}
+			{:getBlock('homePage_1')}
 		<!-- 轮播end-->
 
 		<nav class="nav wraper">
 			<ul>
-				<li><a href="more.html"><i class="drinks-icon"></i><strong>酒品人生</strong></a></li>
-				<li><a href="gift_more.html"><i class="gift-icon"></i><strong>礼品定制</strong></a></li>
-				<li><a href="news_list.html"><i class="news-icon"></i><strong>资讯中心</strong></a></li>
-				<li><a href="contact_us.html"><i class="contact-icon"></i><strong>联系我们</strong></a></li>
+				<li><a href="__ITEM__&a=getMore&channelid=51"><i class="gift-icon"></i><strong>礼品定制</strong></a></li>
+				<li><a href="__NEWS__&a=new_list"><i class="news-icon"></i><strong>资讯中心</strong></a></li>
+				<li><a href="__ROOT__html/about_us.html"><i class="about-icon"></i><strong>关于我们</strong></a></a></li>
+				<li><a href="__ROOT__html/contact_us.html"><i class="contact-icon"></i><strong>联系我们</strong></a></li>
 			</ul>
 		</nav>
 		
 		<section class="module-list wraper">
 			<section class="hd cf">
 				<h2 class="fl">礼品定制</h2>
-				<a href="more.html" class="fr">更多案例</a>
+				<a href="__ITEM__&a=getMore&channelid=51" class="fr">更多案例</a>
 			</section>
 			<section class="bd">
+					{:getBlock('homePage_2')}
 				<ul class="cf data-list1">
 					<li>
 						<a href="gift-detail.html">
@@ -97,9 +97,11 @@
 		<section class="module-list wraper">
 			<section class="hd cf">
 				<h2 class="fl">酒品人生</h2>
+				<a href="__ITEM__&a=getMore&channelid=35" class="fr">更多案例</a>
 				<a href="more.html" class="fr">更多案例</a>
 			</section>
 			<section class="bd">
+					{:getBlock('homePage_3')}
 				<ul class="cf data-list1">
 					<li>
 						<a href="product-detail.html">

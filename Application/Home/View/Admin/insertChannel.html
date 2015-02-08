@@ -99,6 +99,11 @@ try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
 								<tr>
 									<td>{$vo.id}</td>
 									<td>{$vo.title}</td>
+									<td>
+										<if condition="$vo.type eq '1'">货物频道
+										<else />普通频道
+										</if>
+									</td>
 									<td><a target="_blank" href="__ADMIN__&a=detailChannel&channelid={$vo.id}">查看子结点</a>  |  <a target="_blank" href="__ADMIN__&a=delChannel&channelid={$vo.id}">删除</a></td>
 								</tr>
 								</foreach>

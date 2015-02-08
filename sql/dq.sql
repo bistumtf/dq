@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.16, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.21, for Linux (i686)
 --
 -- Host: localhost    Database: dq
 -- ------------------------------------------------------
--- Server version	5.6.16
+-- Server version	5.6.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,14 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `dq`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `dq` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `dq`;
 
 --
 -- Table structure for table `admin`
@@ -53,6 +45,35 @@ INSERT INTO `admin` VALUES (1,'admin','ec208860bb77e3d8d0f4131513f2cc0d','','luv
 UNLOCK TABLES;
 
 --
+-- Table structure for table `block`
+--
+
+DROP TABLE IF EXISTS `block`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `block` (
+  `id` int(32) DEFAULT NULL,
+  `content` mediumtext,
+  `code` mediumtext,
+  `itemid` varchar(32) DEFAULT NULL,
+  `contain` varchar(256) DEFAULT NULL,
+  `type` varchar(32) DEFAULT NULL,
+  `url` varchar(256) DEFAULT NULL,
+  `title` varchar(256) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `block`
+--
+
+LOCK TABLES `block` WRITE;
+/*!40000 ALTER TABLE `block` DISABLE KEYS */;
+INSERT INTO `block` VALUES (1,'									\n			<section id=\'slider\' class=\'swipe\' style=\'visibility: visible;\'>\n			<section class=\'swipe-wrap\'>\n\n	<figure>\n	<div class=\'wrap\'>\n	<a href=\'product-detail.html\'>\n	<img alt=\'this is pic1\' src=\'http://dq/Public/Upload/20150207/36acdee1d8ef481f2d0793d245a6f390_1423299455_8662_0.jpg\' />\n	</a>\n	</div>\n	</figure>\n		</section>\n	</section> 								','									\n			<section id=\'slider\' class=\'swipe\' style=\'visibility: visible;\'>\n			<section class=\'swipe-wrap\'>\n\n<?php\nforeach($data as $k => $v){\n?>\n	<figure>\n	<div class=\'wrap\'>\n	<a href=\'product-detail.html\'>\n	<img alt=\'this is pic1\' src=\'<?php echo $v ?>\' />\n	</a>\n	</div>\n	</figure>\n	<?php } ?>\n	</section>\n	</section> 								','6',NULL,NULL,'./Public/block/1.html',NULL),(6,'									\n			<section id=\'slider\' class=\'swipe\' style=\'visibility: visible;\'>\n			<section class=\'swipe-wrap\'>\n\n	<figure>\n	<div class=\'wrap\'>\n	<a href=\'product-detail.html\'>\n	<img alt=\'this is pic1\' src=\'http://dq/Public/Upload/20150207/36acdee1d8ef481f2d0793d245a6f390_1423299455_8662_0.jpg\' />\n	</a>\n	</div>\n	</figure>\n		</section>\n	</section> 								\n','									\n			<section id=\'slider\' class=\'swipe\' style=\'visibility: visible;\'>\n			<section class=\'swipe-wrap\'>\n\n<?php\nforeach($data as $k => $v){\n?>\n	<figure>\n	<div class=\'wrap\'>\n	<a href=\'product-detail.html\'>\n	<img alt=\'this is pic1\' src=\'<?php echo $v ?>\' />\n	</a>\n	</div>\n	</figure>\n	<?php } ?>\n	</section>\n	</section> 								','6',NULL,NULL,'./Public/block/6.html',NULL),(5,'									\n			<section id=\'slider\' class=\'swipe\' style=\'visibility: visible;\'>\n			<section class=\'swipe-wrap\'>\n\n	<figure>\n	<div class=\'wrap\'>\n	<a href=\'product-detail.html\'>\n	<img alt=\'this is pic1\' src=\'http://dq/Public/Upload/20150207/36acdee1d8ef481f2d0793d245a6f390_1423299455_8662_0.jpg\' />\n	</a>\n	</div>\n	</figure>\n		<figure>\n	<div class=\'wrap\'>\n	<a href=\'product-detail.html\'>\n	<img alt=\'this is pic1\' src=\'http://dq/Public/Upload/20150207/52094dbb829151fcf1093178eea4f797_1423288954_8068_0.jpg\' />\n	</a>\n	</div>\n	</figure>\n		</section>\n	</section> 								','									\n			<section id=\'slider\' class=\'swipe\' style=\'visibility: visible;\'>\n			<section class=\'swipe-wrap\'>\n\n<?php\nforeach($data as $k => $v){\n?>\n	<figure>\n	<div class=\'wrap\'>\n	<a href=\'product-detail.html\'>\n	<img alt=\'this is pic1\' src=\'<?php echo $v ?>\' />\n	</a>\n	</div>\n	</figure>\n	<?php } ?>\n	</section>\n	</section> 								','6,5',NULL,NULL,'./Public/block/5.html',NULL),(NULL,'   <section id=\'slider\' class=\'swipe\' style=\'visibility: visible;\'>\n                        <section class=\'swipe-wrap\'>\n                        \n                      \n        <figure>        \n        <div class=\'wrap\'>\n        <a href=\'\'>                                                                                                                                                    \n        <img alt=\'this is pic1\' src=\'\' />\n        </a>            \n        </div>          \n        </figure>    \n                              \n        <figure>        \n        <div class=\'wrap\'>\n        <a href=\'\'>                                                                                                                                                    \n        <img alt=\'this is pic1\' src=\'http://dq/Public/Upload/20150207/36acdee1d8ef481f2d0793d245a6f390_1423301960_5215_0.jpg\' />\n        </a>            \n        </div>          \n        </figure>    \n                              \n        <figure>        \n        <div class=\'wrap\'>\n        <a href=\'\'>                                                                                                                                                    \n        <img alt=\'this is pic1\' src=\'http://dq/Public/Upload/20150207/36acdee1d8ef481f2d0793d245a6f390_1423299455_8662_0.jpg\' />\n        </a>            \n        </div>          \n        </figure>    \n                              \n        <figure>        \n        <div class=\'wrap\'>\n        <a href=\'\'>                                                                                                                                                    \n        <img alt=\'this is pic1\' src=\'http://dq/Public/Upload/20150207/52094dbb829151fcf1093178eea4f797_1423288954_8068_0.jpg\' />\n        </a>            \n        </div>          \n        </figure>    \n                              \n        <figure>        \n        <div class=\'wrap\'>\n        <a href=\'\'>                                                                                                                                                    \n        <img alt=\'this is pic1\' src=\'\' />\n        </a>            \n        </div>          \n        </figure>    \n           \n        </section>   \n        </section>\n','   <section id=\'slider\' class=\'swipe\' style=\'visibility: visible;\'>\n                        <section class=\'swipe-wrap\'>\n                        \n<?php                   \nforeach($data as $k => $v){\n?>                      \n        <figure>        \n        <div class=\'wrap\'>\n        <a href=\'<?php echo $v[link];?>\'>                                                                                                                                                    \n        <img alt=\'this is pic1\' src=\'<?php echo $v[image_url] ?>\' />\n        </a>            \n        </div>          \n        </figure>    \n        <?php } ?>   \n        </section>   \n        </section>\n','7,6,5',NULL,NULL,'/home/mtf/Application/dq/Public/block/homePage_1.html','homePage_1'),(NULL,'\n\n				<ul class=\"cf data-list1\">\n					<li>\n					<a href=\"\">\n							<strong>d</strong>\n							<img src=\"http://dq/Public/Upload/20150207/36acdee1d8ef481f2d0793d245a6f390_1423299455_8662_0.jpg\"  alt=\"\" />\n						</a>\n					</li>\n										<li>\n					<a href=\"\">\n							<strong>f</strong>\n							<img src=\"http://dq/Public/Upload/20150207/52094dbb829151fcf1093178eea4f797_1423288954_8068_0.jpg\"  alt=\"\" />\n						</a>\n					</li>\n									</ul>\n				<ul class=\"cf data-list2\">\n					<li>\n						<a href=\"\">\n							<strong>213</strong>\n							<img src=\"http://dq/Public/Upload/20150207/36acdee1d8ef481f2d0793d245a6f390_1423301960_5215_0.jpg\"  alt=\"\" />\n						</a>\n					</li>\n									</ul>\n','\n\n				<ul class=\"cf data-list1\">\n<?php \nfor($i=0;$i<2;$i++){\n$one=$data[$i];\n?>\n					<li>\n					<a href=\"<?php echo $one[link];?>\">\n							<strong><?php echo $one[\'title\'];?></strong>\n							<img src=\"<?php echo $one[image_url];?>\"  alt=\"\" />\n						</a>\n					</li>\n					<?php } ?>\n				</ul>\n				<ul class=\"cf data-list2\">\n<?php \nif(count($data)>2){\nfor($i=2;$i<count($data);$i++){\n$one=$data[$i];\n?>\n					<li>\n						<a href=\"<?php echo $one[link];?>\">\n							<strong><?php echo $one[\'title\'];?></strong>\n							<img src=\"<?php echo $one[image_url]; ?>\"  alt=\"\" />\n						</a>\n					</li>\n					<?php }}?>\n				</ul>\n','6,5,7',NULL,NULL,'/home/mtf/Application/dq/Public/block/homePage_2.html','homePage_2');
+/*!40000 ALTER TABLE `block` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `channel`
 --
 
@@ -66,8 +87,9 @@ CREATE TABLE `channel` (
   `title` varchar(256) DEFAULT NULL,
   `child` varchar(256) DEFAULT NULL,
   `parent` varchar(32) DEFAULT NULL,
+  `type` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +98,7 @@ CREATE TABLE `channel` (
 
 LOCK TABLES `channel` WRITE;
 /*!40000 ALTER TABLE `channel` DISABLE KEYS */;
-INSERT INTO `channel` VALUES (8,'javascript:jump(1)','icon-text-width','主页','',''),(14,'javascript:jump(11)','icon-text-width','频道管理','',NULL),(15,'javascript:jump(3)','icon-text-width','土特产','35,',NULL),(35,'javascript:jump(\'__ITEM__&a=item_list&channelid=35\')','icon-text-width','甘肃','','15,');
+INSERT INTO `channel` VALUES (8,'javascript:jump(1)','icon-text-width','主页','','',NULL),(14,'javascript:jump(11)','icon-text-width','频道管理','',NULL,NULL),(15,'javascript:jump(3)','icon-text-width','土特产','35,',NULL,NULL),(35,'javascript:jump(\'__ITEM__&a=item_list&channelid=35\')','icon-text-width','甘肃','','15,','1'),(46,'javascript:jump(\'__NEWS__&a=news_list\')','icon-text-width','新闻页','',NULL,'0'),(51,'javascript:jump(\'__ITEM__&a=item_list&channelid=51\')','icon-text-width','礼品定制','',NULL,'0'),(53,'javascript:jump(\'index.php?m=Home&c=Index&a=message_list\')','icon-text-width','留言','',NULL,'0');
 /*!40000 ALTER TABLE `channel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,14 +147,19 @@ CREATE TABLE `item` (
   `creat_at` varchar(32) DEFAULT NULL,
   `price` varchar(32) DEFAULT NULL,
   `image_url` mediumtext,
-  `webibo_url` mediumtext,
+  `weibo_url` varchar(256) DEFAULT NULL,
   `link` varchar(256) DEFAULT NULL,
   `content` mediumtext,
   `total` varchar(32) DEFAULT NULL,
   `detail` mediumtext,
   `channelid` int(32) DEFAULT NULL,
+  `table_id` varchar(32) DEFAULT NULL,
+  `table_content` mediumtext,
+  `sold_total` varchar(32) DEFAULT '100',
+  `status` varchar(32) DEFAULT NULL,
+  `web_url` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +198,7 @@ CREATE TABLE `liquor` (
   `province` varchar(32) DEFAULT NULL,
   `county` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,8 +207,89 @@ CREATE TABLE `liquor` (
 
 LOCK TABLES `liquor` WRITE;
 /*!40000 ALTER TABLE `liquor` DISABLE KEYS */;
-INSERT INTO `liquor` VALUES (45,1,'1111111111111','22222','2222','2222222','http://dq/Public/Upload/20150204/4b341c37e5160713758a34ca8a39c807_1423060402_5450_0.jpg,http://dq/Public/Upload/20150204/c716e23ed7d620fc1ecce03b00102d76_1423060402_9047_1.jpg,http://dq/Public/Upload/20150204/aa7d8d22d3211a6a93949a77abd2fdef_1423060402_2157_2.jpg','',NULL,'&lt;p&gt;&lt;img alt=&quot;b7003af33a87e9502dab853b13385343fbf2b42c.jpg&quot; src=&quot;/ueditor/php/upload/image/20150204/1423060414108620.jpg&quot; title=&quot;1423060414108620.jpg&quot;/&gt;&lt;/p&gt;','admin','22222','1423060416',NULL,'sSd','国家','省份、州','地级市、县'),(46,1,'3','3','3','3','http:///59e92d2e209a125f9a026c54392782d9_1422378482_2955_0.jpg,http:///d41d8cd98f00b204e9800998ecf8427e_1422378482_3820_1.','',NULL,'',NULL,'3','1422378482',NULL,'3','??','?????','??'),(47,1,'54321','5','54321','5','http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378539_7419_0.jpg,http://http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378539_7419_0.jpg/d41d8cd98f00b204e9800998ecf8427e_1422378539_1419_1.','',NULL,'',NULL,'5','1422378539',NULL,'5','??','????','?????'),(48,1,'333','33','333','33','http://dq/Public/Upload/20150128/59e92d2e209a125f9a026c54392782d9_1422378636_8834_0.jpg','',NULL,'',NULL,'33','1422378636',NULL,'111111','??','?????','??'),(49,1,'','','','','','',NULL,'','admin','','1423058929',NULL,'','国家','省份、州','地级市、县'),(50,1,'','','','','','',NULL,'&lt;p&gt;123123123123&lt;br/&gt;&lt;/p&gt;','admin','','1423060260',NULL,'','国家','省份、州','地级市、县');
 /*!40000 ALTER TABLE `liquor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `message` (
+  `id` int(32) NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) DEFAULT NULL,
+  `phone` varchar(256) DEFAULT NULL,
+  `email` varchar(256) DEFAULT NULL,
+  `content` mediumtext,
+  `creat_at` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `message`
+--
+
+LOCK TABLES `message` WRITE;
+/*!40000 ALTER TABLE `message` DISABLE KEYS */;
+INSERT INTO `message` VALUES (1,'123','213','21321','321321313',NULL);
+/*!40000 ALTER TABLE `message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `news` (
+  `id` int(32) NOT NULL AUTO_INCREMENT,
+  `title` varchar(256) DEFAULT NULL,
+  `content` mediumtext,
+  `creat_at` varchar(32) DEFAULT NULL,
+  `status` varchar(32) DEFAULT NULL,
+  `url` varchar(256) DEFAULT NULL,
+  `address_url` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `news`
+--
+
+LOCK TABLES `news` WRITE;
+/*!40000 ALTER TABLE `news` DISABLE KEYS */;
+INSERT INTO `news` VALUES (1,'123213','&lt;p&gt;ffff&lt;br/&gt;&lt;/p&gt;','1423310080','1','http://dq/news/20150208/1423361869_1_316.html',NULL),(2,'fff','&lt;p&gt;12312323123&lt;br/&gt;&lt;/p&gt;','1423361797','1','http://dq/news/20150208/1423362065_2_642.html','/home/mtf/Application/dq/news/20150208/1423362065_2_642.html');
+/*!40000 ALTER TABLE `news` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `table_item`
+--
+
+DROP TABLE IF EXISTS `table_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `table_item` (
+  `id` int(32) NOT NULL AUTO_INCREMENT,
+  `content` mediumtext,
+  `title` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `table_item`
+--
+
+LOCK TABLES `table_item` WRITE;
+/*!40000 ALTER TABLE `table_item` DISABLE KEYS */;
+INSERT INTO `table_item` VALUES (3,'array (\n  0 => \'酒精度\',\n  1 => \'产地\',\n  2 => \'保质期\',\n)','酒');
+/*!40000 ALTER TABLE `table_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -222,4 +330,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-06 20:03:21
+-- Dump completed on 2015-02-08 10:57:16
