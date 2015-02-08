@@ -137,7 +137,7 @@
 							</tr>
 
 							<foreach name="table_info" item="vo" key="key">
-							<tr class='new_tr'><td>{$vo['title']}</td><td><input name='item[{$key}]' value="{$vo[content]}"/></td></tr>";
+							<tr class='new_tr'><td>{$vo['title']}</td><td><input name='item[{$key}]' value="{$vo[content]}"/></td></tr>
 							</foreach>
 							<script>
 
@@ -175,7 +175,7 @@ $("#table_tr").after(str);
 				<tr>
 					<td colspan="2">
 						<div>
-							<script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+							<script id="editor" type="text/plain" style="width:1024px;height:500px;">{$vo.content}</script>
 						</div>
 					</td>
 

@@ -3,16 +3,16 @@
 <html>
 <head>
  <meta http-equiv=Content-Type content="text/html;charset=utf-8"/>
-<script src="http://dq//Public/js/jquery_1.js"></script>
-    <script type="text/javascript" charset="utf-8" src="http://dq//Public/js/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="http://dq//Public/js/ueditor/ueditor.all.js"></script>
+<script src="http://dq/Public/js/jquery_1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://dq/Public/js/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://dq/Public/js/ueditor/ueditor.all.js"></script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="http://dq//Public/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://dq/Public/js/ueditor/lang/zh-cn/zh-cn.js"></script>
 
 
-    <link href="http://dq//Public/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://dq//Public/assets/css/font-awesome.min.css" />
+    <link href="http://dq/Public/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://dq/Public/assets/css/font-awesome.min.css" />
 
     <!--[if IE 7]>
       <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -21,9 +21,9 @@
     <!-- fonts -->
     <!-- ace styles -->
 
-    <link rel="stylesheet" href="http://dq//Public/assets/css/ace.css" />
-    <link rel="stylesheet" href="http://dq//Public/assets/css/ace-rtl.min.css" />
-    <link rel="stylesheet" href="http://dq//Public/assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="http://dq/Public/assets/css/ace.css" />
+    <link rel="stylesheet" href="http://dq/Public/assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="http://dq/Public/assets/css/ace-skins.min.css" />
 
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -31,7 +31,7 @@
     <!-- inline styles related to this page -->
     <!-- ace settings handler -->
 
-    <script src="http://dq//Public/assets/js/ace-extra.js"></script>
+    <script src="http://dq/Public/assets/js/ace-extra.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -132,7 +132,7 @@
 								</td>
 							</tr>
 
-							<?php if(is_array($table_info)): foreach($table_info as $key=>$vo): ?><tr class='new_tr'><td><?php echo ($vo['title']); ?></td><td><input name='item[<?php echo ($key); ?>]' value="<?php echo ($vo[content]); ?>"/></td></tr>";<?php endforeach; endif; ?>
+							<?php if(is_array($table_info)): foreach($table_info as $key=>$vo): ?><tr class='new_tr'><td><?php echo ($vo['title']); ?></td><td><input name='item[<?php echo ($key); ?>]' value="<?php echo ($vo[content]); ?>"/></td></tr><?php endforeach; endif; ?>
 							<script>
 
 var item_table_id='<?php echo ($item_table_id); ?>';
@@ -169,7 +169,7 @@ $("#table_tr").after(str);
 				<tr>
 					<td colspan="2">
 						<div>
-							<script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+							<script id="editor" type="text/plain" style="width:1024px;height:500px;"><?php echo ($vo["content"]); ?></script>
 						</div>
 					</td>
 

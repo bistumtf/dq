@@ -249,6 +249,8 @@ class IndexController extends Controller {
 		$data['country']=I("post.country");
 		$data['province']=I("post.province");
 		$data['county']=I("post.county");
+		$data['table_id']=I('table_item_id');
+		$data['table_content']=var_export(I('post.item'),true);
 
 
 		$date=date("Ymd",time());

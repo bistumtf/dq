@@ -1,44 +1,92 @@
-<include file="./Public/header/header.html" />
+<!DOCTYPE html>
+<html>
+<head>
+	<title>更多页面</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link rel="stylesheet" href="http://dq/Public/swipe/style/base.css" type="text/css"/>
+    <link rel="stylesheet" href="http://dq/Public/swipe/style/common.css" type="text/css"/>
+    <style>
+tr{width:50%}
+th{width:50%}
+    </style>
+</head>
+<body class="bg-gray">
+	<section id="container" class="container">
+		<header id="header" class="cf">
+			<section class="top-defalt cf">
+				<h1 id="logo" class="logo">
+					北京大秦汇通商贸有限公司
+				</h1>
+				<div id="top-menu" class="top-menu">
+					<div class="icon-bar"></div>
+					<div class="icon-bar"></div>
+					<div class="icon-bar"></div>
+				</div>
+			</section>
+			<nav id="top-menu-content" class="top-menu-content h0">
+				<ul>
+					<li><a href="http://dq//mobile_index.html">首页</a></li>
+					<li><a href="http://dq/index.php?m=Item&c=Index&a=getMore&channelid=35">特产</a></li>
+					<li><a href="http://dq/index.php?m=Item&c=Index&a=getMore">礼品定制</a></li>
+					<li><a href="http://dq/index.php?m=News&c=Index&a=new_list">资讯中心</a></li>
+					<li><a href="http://dq/Public/about_us.html">关于我们</a></li>
+					<li><a href="http://dq/html/contact_us.html">联系我们</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<nav class="nav wraper">
+			<ul>
+				<li><a href="http://dq/index.php?m=Item&c=Index&a=getMore"><i class="gift-icon"></i><strong>礼品定制</strong></a></li>
+				<li><a href="http://dq/index.php?m=News&c=Index&a=news_list"><i class="news-icon"></i><strong>资讯中心</strong></a></li>
+				<li><a href="http://dq/html/about_us.html"><i class="about-icon"></i><strong>关于我们</strong></a></a></li>
+				<li><a href="http://dq/html/contact_us.html"><i class="contact-icon"></i><strong>联系我们</strong></a></li>
+			</ul>
+		</nav>
+		
+	
+
 		
 		<section class="product-intro wraper">
 			<!-- 轮播start-->
 			<section id="slider" class="swipe" style="visibility: visible;">
 				<section class="swipe-wrap">
-					<foreach name="image_url" item="vo" key="k">
 					<figure>
 						<div class="wrap">
-							<img src="{$vo}" alt="" />
+							<img src="http://dq/Public/Upload/20150208/36acdee1d8ef481f2d0793d245a6f390_1423364733_6387_0.jpg" alt="" />
 						</div>
-					</figure>
-					</foreach>
-				</section>
+					</figure><figure>
+						<div class="wrap">
+							<img src="http://dq/Public/Upload/20150208/52094dbb829151fcf1093178eea4f797_1423364733_800_1.jpg" alt="" />
+						</div>
+					</figure>				</section>
 			</section>
 			<!-- 轮播end-->
 			
 			<section class="product-name">
-				<h3>{$data.title}</h3>
+				<h3>测试</h3>
 			</section>
 			
 			<div class="product-info">
-				<span>价格：<em>￥{$data.price}</em></span>
-				<em>累计销量{$data.sold_total}件</em>
+				<span>价格：<em>￥11</em></span>
+				<em>累计销量22件</em>
 			</div>
 			
 			<section class="txt-intro">
 				<div class="parameter">
 					<h3>规格参数</h3>
 					<table>
-						<foreach name="table_info" item="vo" key="key">
-						<tr><th>{$key}</th><td>{$vo}</td></tr>
-						</foreach>
-					</table>
+						<tr><th>酒精度</th><td></td></tr>					</table>
 				</div>
 				
 				<div class="parameter">
 					<h3>图文介绍</h3>
 					<div class="txt-pic-intro">
-						{$data.content}
-
+						<p>ffffffffffffffuck<br/></p>
 					</div>
 				</div>
 				
@@ -51,14 +99,12 @@
 				
 			</section>
 			
-			<!--
 			<div class="bdsharebuttonbox">
 				<span class="share-txt">分享到：</span>
 				<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
 				<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
 				<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
 			</div>
-			-->
 			<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 			
 			
@@ -70,8 +116,8 @@
 			<p>Copyright © 北京大秦汇通商贸有限公司 </br>Powered by: 大秦汇通</p>
 		</footer>
 	</section>
-	<script src="__PUBLIC__swipe/js/zepto.min.js"></script>
-	<script src="__PUBLIC__swipe/js/swipe.js"></script>
+	<script src="http://dq/Public/swipe/js/zepto.min.js"></script>
+	<script src="http://dq/Public/swipe/js/swipe.js"></script>
 	<script>
 	
 		$(function(){

@@ -34,7 +34,7 @@ th{width:50%}
 					<li><a href="http://dq/index.php?m=Item&c=Index&a=getMore">礼品定制</a></li>
 					<li><a href="http://dq/index.php?m=News&c=Index&a=new_list">资讯中心</a></li>
 					<li><a href="http://dq/Public/about_us.html">关于我们</a></li>
-					<li><a href="contact_us.html">联系我们</a></li>
+					<li><a href="http://dq/html/contact_us.html">联系我们</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -43,6 +43,7 @@ th{width:50%}
 			<ul>
 				<li><a href="http://dq/index.php?m=Item&c=Index&a=getMore"><i class="gift-icon"></i><strong>礼品定制</strong></a></li>
 				<li><a href="http://dq/index.php?m=News&c=Index&a=news_list"><i class="news-icon"></i><strong>资讯中心</strong></a></li>
+				<li><a href="http://dq/html/about_us.html"><i class="about-icon"></i><strong>关于我们</strong></a></a></li>
 				<li><a href="http://dq/html/contact_us.html"><i class="contact-icon"></i><strong>联系我们</strong></a></li>
 			</ul>
 		</nav>

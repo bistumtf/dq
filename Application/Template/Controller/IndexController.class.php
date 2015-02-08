@@ -40,7 +40,6 @@ class IndexController extends Controller {
 		$table=M("table_item")->where("id=$table_id")->find();
 
 
-
 		$res['content']=htmlspecialchars_decode($res['content']);
 		eval('$item_table_content='.$res['table_content'].';');
 		eval('$table_content='.$table['content'].';');
